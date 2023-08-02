@@ -13,14 +13,16 @@ public class Hazard : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
+            Debug.Log("e");
+            //other.GetComponent<NewBehaviourScript>().Damage(damage * Time.deltaTime);
         }
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-
+            Debug.Log("w");
+            //other.GetComponent<NewBehaviourScript>().Damage(damage * Time.deltaTime);
         }
     }
 }
