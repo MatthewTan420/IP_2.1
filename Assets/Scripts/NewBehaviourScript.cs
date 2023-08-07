@@ -15,9 +15,13 @@ public class NewBehaviourScript : MonoBehaviour
     float test = 0;
 
     Vector3 movementInput = Vector3.zero;
-    public float movementSpeed = 0.0f;
+    public float movementSpeed;
+    public float sprintSpeed;
     Vector3 rotationInput = Vector3.zero;
-    public float rotationSpeed = 0.0f;
+    public float rotationSpeed;
+    private bool sprint = false;
+    private float curSpeed;
+    private float curSprint;
 
     public Transform camera;
     public Rigidbody rb;
@@ -31,18 +35,37 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject ammo;
     public GameObject ammoCon;
     public TextMeshProUGUI ammoCount;
-    public GameObject melee;
+    GameObject melee;
+    public GameObject meleeCon;
     Shoot gunScript;
-    PickUpGun pickScript;
-    public Melee meleeScript;
+    PickUpGun pickScriptG;
+    Melee meleeScript;
+    PickUpMelee pickScriptM;
 
     public float Health;
-    public float curHealth;
+    public static float curHealth;
     public HP_Bar healthbar;
+    private bool isDead = false;
 
+    public static InventoryManager Instance;
+    public List<Item> Items;
+    public List<Item> NewItems;
+    public List<Item> Items2;
+    public List<Item> NewItems2;
+    public Item Item;
+    public float heal = 3.0f;
+    
     public GameObject Inven;
     public GameObject UI;
+    public GameObject Menu;
+    public GameObject DeathMenu;
     public InventoryManager invenScript;
+
+    public bool isStuck = false;
+
+    public static bool isTeleport = false;
+
+    public bool isSwitched = false;
 
     /// <summary>
     /// Controls the player actions and movements
@@ -58,41 +81,85 @@ public class NewBehaviourScript : MonoBehaviour
     }
     void OnJump(InputValue value)
     {
-        rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
-    }
-
-    void OnEquip(InputValue value)
-    {
-        if (isEquip == true)
+        if (isStuck == false)
         {
-            isEquip = false;
-            isEquip2 = false;
-        }
-        else if (isEquip == false)
-        {
-            isEquip = true;
+            rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
         }
     }
 
-    void OnEquip2(InputValue value)
+    void OnSprint()
     {
-        if (isEquip2 == true)
+        sprint = true;
+    }
+    void OnSprintDone()
+    {
+        sprint = false;
+    }
+
+    void OnHeal(InputValue value)
+    {
+        if (Items.Contains(Item))
         {
-            isEquip2 = false;
-            isEquip = false;
-        }
-        else if (isEquip2 == false)
-        {
-            isEquip2 = true;
+            if (curHealth <= Health)
+            {
+                curHealth += heal;
+                Items.Remove(Item);
+                Items2.Remove(Item);
+                healthbar.SetHealth(curHealth);
+                if (curHealth >= Health)
+                {
+                    curHealth = Health;
+                    healthbar.SetHealth(curHealth);
+                }
+            }
+            if (!Items.Contains(Item))
+            {
+                NewItems.Remove(Item);
+                NewItems2.Remove(Item);
+            }
         }
     }
 
     void OnInven(InputValue value)
     {
-        Inven.SetActive(true);
-        UI.SetActive(false);
-        isLock = false;
-        invenScript.ListItems();
+        if (isDead != true)
+        {
+            Inven.SetActive(true);
+            UI.SetActive(false);
+            isLock = false;
+            invenScript.ListItems();
+        }
+        
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Menu")
+        {
+            Menu.SetActive(true);
+            isLock = false;
+            isTeleport = false;
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Teleport")
+        {
+            isTeleport = true;
+        }
+        else if (col.gameObject.tag == "Crawler")
+        {
+            isStuck = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Crawler")
+        {
+            isStuck = false;
+        }
     }
 
     public void Lock()
@@ -116,6 +183,11 @@ public class NewBehaviourScript : MonoBehaviour
             curHealth -= dmg;
             healthbar.SetHealth(curHealth);
         }
+        else if (curHealth <= 0)
+        {
+            isDead = true;
+            GetComponent<Animator>().SetTrigger("isDie");
+        }
     }
 
     /// <summary>
@@ -123,10 +195,10 @@ public class NewBehaviourScript : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        gun = FindObjectOfType<Shoot>().gameObject;
-        gunScript = gun.GetComponent<Shoot>();
-        pickScript = gun.GetComponent<PickUpGun>();
         isLock = true;
+
+        NewItems2 = InventoryManager.NewItems2;
+        Items2 = InventoryManager.Items2;
     }
 
     /// <summary>
@@ -134,8 +206,20 @@ public class NewBehaviourScript : MonoBehaviour
     /// </summary>
     void Start()
     {
-        curHealth = Health;
+        curSpeed = movementSpeed;
+        curSprint = sprintSpeed;
+
+        if (isTeleport == true)
+        {
+            //curHealth = curHealth;
+            isTeleport = false;
+        }
+        else
+        {
+            curHealth = Health;
+        }
         healthbar.SetMaxHealth(Health);
+        healthbar.SetHealth(curHealth);
     }
 
     /// <summary>
@@ -143,7 +227,27 @@ public class NewBehaviourScript : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+        if (isStuck == true)
+        {
+            curSpeed = 0.0f;
+            curSprint = 0.0f;
+        }
+        else
+        {
+            curSpeed = movementSpeed;
+            curSprint = sprintSpeed;
+        }
+
+        Items = InventoryManager.Instance.Items;
+        NewItems = InventoryManager.Instance.NewItems;
+
+        if (curHealth <= 0)
+        {
+            DeathMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
+
         if (isLock == true)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -154,47 +258,26 @@ public class NewBehaviourScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f;
         }
-        
-        if (isEquip == true)
-        {
-            gunCon.SetActive(true);
-            ammo.SetActive(true);
-            gunScript.enabled = true;
-            melee.SetActive(false);
-            meleeScript.enabled = false;
-        }
-        if (isEquip == false)
-        {
-            gunCon.SetActive(false);
-            ammo.SetActive(false);
-            gunScript.enabled = false;
-        }
 
-        if (isEquip2 == true)
-        {
-            melee.SetActive(true);
-            meleeScript.enabled = true;
-            gunCon.SetActive(false);
-            ammo.SetActive(false);
-            gunScript.enabled = false;
-        }
-        if (isEquip2 == false)
-        {
-            melee.SetActive(false);
-            meleeScript.enabled = false;
-        }
-
-        /// <summary>
-        /// Player movement.
-        /// </summary>
-        Vector3 forwarDir = transform.forward;
+    /// <summary>
+    /// Player movement.
+    /// </summary>
+    Vector3 forwarDir = transform.forward;
         forwarDir *= movementInput.y;
 
         Vector3 rightDir = transform.right;
         rightDir *= movementInput.x;
 
-        GetComponent<Rigidbody>().MovePosition(transform.position
-            + (forwarDir + rightDir) * movementSpeed);
+        if (sprint == true)
+        {
+            GetComponent<Rigidbody>().MovePosition(transform.position
+            + (forwarDir + rightDir) * curSprint);
+        }
+        else
+        {
+            GetComponent<Rigidbody>().MovePosition(transform.position
+                + (forwarDir + rightDir) * curSpeed);
+        }
 
         if (isLock == true)
         {

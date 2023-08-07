@@ -10,7 +10,8 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public NavMeshAgent agent;
-    private Transform player, NPC;
+    public Transform player;
+    private Transform NPC;
     public LayerMask whatIsGround, whatIsPlayer, whatIsNPC;
 
     public Vector3 walkPoint;
@@ -31,13 +32,12 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        player = FindObjectOfType<NewBehaviourScript>().transform;
-        NPC = FindObjectOfType<NPC>().transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
+        player = FindObjectOfType<NewBehaviourScript>().transform;
         if (isDead == false)
         {
             playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -168,6 +168,7 @@ public class Enemy : MonoBehaviour
 
     private void ChaseNPC()
     {
+        NPC = FindObjectOfType<NPC>().transform;
         agent.SetDestination(NPC.position);
         agent.speed = 3.5f;
         GetComponent<Animator>().SetTrigger("isRun");

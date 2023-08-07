@@ -11,12 +11,12 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     public Item Item;
-    private Transform player;
+    public Transform player;
     public float pickUpRange;
 
     void Awake()
     {
-        player = FindObjectOfType<NewBehaviourScript>().transform;
+        
     }
 
     /// <summary>
@@ -33,6 +33,7 @@ public class ItemPickUp : MonoBehaviour
     /// </summary>
     void OnPickUp()
     {
+        player = FindObjectOfType<NewBehaviourScript>().transform;
         Vector3 distanceToPlayer = player.position - transform.position;
         if (distanceToPlayer.magnitude <= pickUpRange)
         {

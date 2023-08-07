@@ -23,10 +23,15 @@ public class Shoot : MonoBehaviour
     private TextMeshProUGUI Ammo;
     public ParticleSystem MuzzleFlash;
 
-    private NewBehaviourScript script;
-    private Transform player;
+    public NewBehaviourScript script;
+    public Transform player;
 
     void Awake()
+    {
+        
+    }
+
+    void Start()
     {
         player = FindObjectOfType<NewBehaviourScript>().transform;
         script = player.GetComponent<NewBehaviourScript>();
@@ -35,6 +40,11 @@ public class Shoot : MonoBehaviour
         bulletsLeft = magazineSize;
         readyToShoot = true;
         Ammo.text = bulletsLeft + "/" + magazineSize;
+    }
+
+    void Update()
+    {
+        
     }
 
     public void SetUp()
@@ -73,6 +83,10 @@ public class Shoot : MonoBehaviour
             {
                 hit.transform.GetComponent<Enemy>().Damage(dmg);
             }
+            else if (hit.transform.tag == "Crawler")
+            {
+                hit.transform.GetComponent<Crawler>().Damage(dmg);
+            }
         }
         bulletsLeft -= 1;
         Ammo.text = bulletsLeft + "/" + magazineSize;
@@ -93,9 +107,13 @@ public class Shoot : MonoBehaviour
     /// </summary>
     void OnReload(InputValue value)
     {
-        reloading = true;
-        Ammo.text = "Reloading...";
-        Invoke(nameof(ReloadFinish), reloadTime);
+        if (holdGun == true)
+        {
+            reloading = true;
+            Ammo.text = "Reloading...";
+            Invoke(nameof(ReloadFinish), reloadTime);
+        }
+        
     }
 
     void ReloadFinish()

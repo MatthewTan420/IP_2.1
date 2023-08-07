@@ -14,14 +14,28 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance;
     public List<Item> Items = new List<Item>();
     public List<Item> NewItems = new List<Item>();
+    public static List<Item> Items2 = new List<Item>();
+    public static List<Item> NewItems2 = new List<Item>();
 
     public Transform ItemContent;
     public GameObject InventoryItem;
     private int count;
 
+    public bool isTeleport;
+
     private void Awake()
     {
         Instance = this;
+        isTeleport = NewBehaviourScript.isTeleport;
+    }
+
+    private void Update()
+    {
+        if(isTeleport == true)
+        {
+            Items = Items2;
+            NewItems = NewItems2;
+        }
     }
 
     /// <summary>
@@ -32,10 +46,12 @@ public class InventoryManager : MonoBehaviour
         if (!NewItems.Contains(item))
         {
             NewItems.Add(item);
+            NewItems2.Add(item);
         }
 
         Items.Add(item);
-        
+        Items2.Add(item);
+
     }
 
     /// <summary>
@@ -44,7 +60,9 @@ public class InventoryManager : MonoBehaviour
     public void Remove(Item item)
     {
         Items.Remove(item);
+        Items2.Remove(item);
         NewItems.Remove(item);
+        NewItems2.Remove(item);
     }
 
     /// <summary>
