@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8981460443312064004}
   - component: {fileID: 5407509488168700321}
   - component: {fileID: 7849671291874934123}
-  - component: {fileID: 9046541558250566292}
+
   m_Layer: 0
   m_Name: Very Dirty Wall Door
   m_TagString: Untagged
@@ -84,17 +84,4 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9046541558250566292
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8642229578760641726}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2149476648040492839, guid: d54aac34ce39f9d4fadae5333853dec0, type: 3}
+
