@@ -151,7 +151,6 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6214923066490527650}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-
   m_LocalScale: {x: 0.008137775, y: 0.008137775, z: 0.008137775}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -251,7 +250,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8101495581386986541}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+<<<<<<< Updated upstream
 
+=======
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -317,7 +320,7 @@ MeshCollider:
   m_GameObject: {fileID: 8101495581386986541}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
