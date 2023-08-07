@@ -12,7 +12,8 @@ using UnityEngine.AI;
 public class Companion : MonoBehaviour
 {
     public NavMeshAgent agent;
-    private Transform player, enemy;
+    public Transform player;
+    private Transform enemy;
     private bool isReady = false;
     Vector3 dest;
     public float pickUpRange, sightRange;
@@ -23,10 +24,13 @@ public class Companion : MonoBehaviour
 
     void Awake()
     {
-        player = FindObjectOfType<NewBehaviourScript>().transform;
         enemy = FindObjectOfType<Enemy>().transform;
     }
 
+    void Start()
+    {
+        player = FindObjectOfType<NewBehaviourScript>().transform;
+    }
     /// <summary>
     /// Companions follow player if he wants it to
     /// </summary>
@@ -40,7 +44,6 @@ public class Companion : MonoBehaviour
                 enemy = FindObjectOfType<Enemy>().transform;
                 dest = enemy.position;
                 agent.destination = dest;
-                //agent.speed = 13.0f;
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     GetComponent<Animator>().SetTrigger("isAtk");
@@ -70,6 +73,14 @@ public class Companion : MonoBehaviour
                     GetComponent<Animator>().ResetTrigger("isAtk");
                 }
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Crawler")
+        {
+            agent.speed = 0.0f;
         }
     }
 

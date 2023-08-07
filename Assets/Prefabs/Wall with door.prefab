@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1061169117751484991}
+
   m_Layer: 0
   m_Name: Wall with door
   m_TagString: Untagged
@@ -34,6 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+
 --- !u!1 &5023651432180588263
 GameObject:
   m_ObjectHideFlags: 0

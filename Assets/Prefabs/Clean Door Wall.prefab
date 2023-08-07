@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8964043827121760540}
   - component: {fileID: 5461025539054577337}
   - component: {fileID: 7795030027837362803}
+
   m_Layer: 0
   m_Name: Clean Door Wall
   m_TagString: Untagged
@@ -83,3 +84,4 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+

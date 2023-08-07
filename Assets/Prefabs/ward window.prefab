@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1785990660572272763}
   - component: {fileID: 6741494855430420674}
   - component: {fileID: 4966041345702504853}
+
   m_Layer: 0
   m_Name: pCube41
   m_TagString: Untagged
@@ -83,6 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+
 --- !u!1 &632184518401140999
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +96,7 @@ GameObject:
   - component: {fileID: 3785823392305247106}
   - component: {fileID: 2237889458015074670}
   - component: {fileID: 7282429556957594618}
+
   m_Layer: 0
   m_Name: pCube39
   m_TagString: Untagged
@@ -166,6 +169,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+
 --- !u!1 &2861500123743389588
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +218,7 @@ GameObject:
   - component: {fileID: 413049241503857535}
   - component: {fileID: 1603889389169752674}
   - component: {fileID: 6943231313350752845}
+
   m_Layer: 0
   m_Name: pCube42
   m_TagString: Untagged
@@ -286,6 +291,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+
 --- !u!1 &4387493791017093606
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +303,7 @@ GameObject:
   - component: {fileID: 2617426878575828565}
   - component: {fileID: 6186174846171705996}
   - component: {fileID: 8256283703975953495}
+
   m_Layer: 0
   m_Name: pCube40
   m_TagString: Untagged
@@ -369,6 +376,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+
 --- !u!1 &5489890637861259123
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +388,7 @@ GameObject:
   - component: {fileID: 1164387322380416559}
   - component: {fileID: 3893390380533732997}
   - component: {fileID: 4634749449405830092}
+
   m_Layer: 0
   m_Name: pCube43
   m_TagString: Untagged
@@ -452,6 +461,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+
 --- !u!1 &6514666947484775997
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +473,7 @@ GameObject:
   - component: {fileID: 573464254906144892}
   - component: {fileID: 765389712612738451}
   - component: {fileID: 4794268732447398231}
+
   m_Layer: 0
   m_Name: pCube43 (1)
   m_TagString: Untagged
@@ -535,3 +546,4 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+

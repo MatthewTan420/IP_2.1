@@ -35,17 +35,28 @@ public class NPC : MonoBehaviour
             {
                 enemy = FindObjectOfType<Enemy>().transform;
                 RunNPC();
+                
             }
             else
             {
-                //Debug.Log("Idle");
+                Idling();
             }
         }
         else
         {
-            //Debug.Log("Die");
+            Invoke(nameof(DestroyEnemy), 5.0f);
+            GetComponent<Animator>().SetTrigger("isDead");
+            GetComponent<Animator>().ResetTrigger("isRun");
+            GetComponent<Animator>().ResetTrigger("isIdle");
             return;
         }
+    }
+
+    private void Idling()
+    {
+        GetComponent<Animator>().SetTrigger("isIdle");
+        GetComponent<Animator>().ResetTrigger("isRun");
+        GetComponent<Animator>().ResetTrigger("isDead");
     }
 
     private void RunNPC()
@@ -53,6 +64,9 @@ public class NPC : MonoBehaviour
         Vector3 normDir = (enemy.position - transform.position).normalized;
         normDir = Quaternion.AngleAxis(Random.Range(-90, 90), Vector3.up) * normDir;
         MoveToPos(transform.position - (normDir * displacementDist));
+        GetComponent<Animator>().SetTrigger("isRun");
+        GetComponent<Animator>().ResetTrigger("isIdle");
+        GetComponent<Animator>().ResetTrigger("isDead");
     }
 
     private void MoveToPos(Vector3 pos)
@@ -63,6 +77,11 @@ public class NPC : MonoBehaviour
     public void Die()
     {
         isDead = true;
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()
