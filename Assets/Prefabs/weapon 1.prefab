@@ -254,24 +254,34 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
+<<<<<<< Updated upstream:Assets/Prefabs/weapon 1.prefab
   m_Father: {fileID: 2538675401302455538}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7890066423958960618
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+=======
+  m_Father: {fileID: 8061216248864109603}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefabs/weapon 1.prefab
   m_GameObject: {fileID: 8614268667517536871}
   m_Mesh: {fileID: -2734373363205334929, guid: f0f7bc92f02b3194e95af34c9ad25406, type: 3}
 --- !u!23 &5023477444403371697
+=======
+  m_GameObject: {fileID: 4280699011362998966}
+  m_Mesh: {fileID: -2734373363205334929, guid: f0f7bc92f02b3194e95af34c9ad25406, type: 3}
+--- !u!23 &671850784888512096
+>>>>>>> Stashed changes:Assets/Prefabs/weapon.prefab
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefabs/weapon 1.prefab
   m_GameObject: {fileID: 8614268667517536871}
+=======
+  m_GameObject: {fileID: 4280699011362998966}
+>>>>>>> Stashed changes:Assets/Prefabs/weapon.prefab
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -307,7 +317,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefabs/weapon 1.prefab
 --- !u!1 &8734704836511234617
+=======
+--- !u!1 &7247666032160452249
+>>>>>>> Stashed changes:Assets/Prefabs/weapon.prefab
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,20 +329,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream:Assets/Prefabs/weapon 1.prefab
   - component: {fileID: 4908663166017199351}
+=======
+  - component: {fileID: 8061216248864109603}
+>>>>>>> Stashed changes:Assets/Prefabs/weapon.prefab
   m_Layer: 0
-  m_Name: pCube197
+  m_Name: weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream:Assets/Prefabs/weapon 1.prefab
 --- !u!4 &4908663166017199351
+=======
+--- !u!4 &8061216248864109603
+>>>>>>> Stashed changes:Assets/Prefabs/weapon.prefab
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefabs/weapon 1.prefab
   m_GameObject: {fileID: 8734704836511234617}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -24.699974, y: 4.8590117, z: -275.1103}
@@ -338,4 +361,15 @@ Transform:
   - {fileID: 5778585143044729523}
   m_Father: {fileID: 3699409978680158183}
   m_RootOrder: 2
+=======
+  m_GameObject: {fileID: 7247666032160452249}
+  m_LocalRotation: {x: -0, y: 0.19819367, z: -0, w: 0.9801629}
+  m_LocalPosition: {x: -0.0232, y: 0.0060303546, z: -0.0428}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5635585717982785436}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+>>>>>>> Stashed changes:Assets/Prefabs/weapon.prefab
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
