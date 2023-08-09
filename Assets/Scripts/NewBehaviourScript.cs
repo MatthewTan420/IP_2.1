@@ -62,8 +62,9 @@ public class NewBehaviourScript : MonoBehaviour
     public InventoryManager invenScript;
 
     public bool isStuck = false;
-
     public static bool isTeleport = false;
+    public static bool isLight = false;
+    public GameObject light;
 
     public bool isSwitched = false;
 
@@ -236,6 +237,15 @@ public class NewBehaviourScript : MonoBehaviour
         {
             curSpeed = movementSpeed;
             curSprint = sprintSpeed;
+        }
+
+        if (isLight == true)
+        {
+            light.SetActive(true);
+        }
+        else
+        {
+            light.SetActive(false);
         }
 
         Items = InventoryManager.Instance.Items;
