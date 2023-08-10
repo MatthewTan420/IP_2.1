@@ -68,6 +68,9 @@ public class NewBehaviourScript : MonoBehaviour
 
     public bool isSwitched = false;
 
+    public GameObject questCon;
+    public TextMeshProUGUI questText;
+
     /// <summary>
     /// Controls the player actions and movements
     /// </summary>
@@ -160,6 +163,10 @@ public class NewBehaviourScript : MonoBehaviour
         if (col.gameObject.tag == "Crawler")
         {
             isStuck = false;
+        }
+        else if (col.gameObject.tag == "Quest")
+        {
+            Destroy(col.gameObject);
         }
     }
 
