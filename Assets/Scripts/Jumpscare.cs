@@ -12,7 +12,7 @@ public class Jumpscare : MonoBehaviour
         if (other.tag == "Player")
         {
             jumpscare.GetComponent<Animator>().SetTrigger("isJumped");
-            Invoke(nameof(DestroyJump), 1.0f);
+            Invoke(nameof(DestroyJump), 1.5f);
         }
     }
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8981460443312064004}
   - component: {fileID: 5407509488168700321}
   - component: {fileID: 7849671291874934123}
+
   m_Layer: 0
   m_Name: Very Dirty Wall Door
   m_TagString: Untagged
@@ -83,3 +84,4 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+

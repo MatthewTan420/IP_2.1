@@ -13,8 +13,9 @@ public class PickUpGun : MonoBehaviour
     public Shoot gunScript;
     public Rigidbody rb;
     public Collider coll;
+    public Transform gun;
     private Transform player;
-    private NewBehaviourScript script;
+    NewBehaviourScript script;
     private Transform gunContainer, fpsCam;
     private GameObject ammoCount;
 
@@ -22,32 +23,32 @@ public class PickUpGun : MonoBehaviour
     public float dropForwardForce, dropUpwardForce;
 
     public bool equipped;
+    private bool Active = true;
     public static bool slotFull;
 
     public Item Item;
-
+    
     private void Start()
     {
         gunScript.SetUp();
         player = FindObjectOfType<NewBehaviourScript>().transform;
-        script = player.GetComponent<NewBehaviourScript>();
+        script = FindObjectOfType<NewBehaviourScript>();
         gunContainer = FindObjectOfType<gunContainer>().transform;
         ammoCount = script.ammoCon;
+        ammoCount.SetActive(false);
         fpsCam = FindObjectOfType<Camera>().transform;
-
+        
         if (!equipped)
         {
             gunScript.enabled = false;
             rb.isKinematic = false;
             coll.isTrigger = false;
-            ammoCount.SetActive(false);
         }
         if (equipped)
         {
             gunScript.enabled = true;
             rb.isKinematic = true;
             coll.isTrigger = true;
-            ammoCount.SetActive(true);
             slotFull = true;
         }
     }
@@ -58,7 +59,7 @@ public class PickUpGun : MonoBehaviour
     void OnPickUp()
     {
         //Drop if equipped and "Q" is pressed
-        if (equipped == true) 
+        if (equipped == true && Active == true) 
         {
             Drop();
         }
@@ -70,6 +71,32 @@ public class PickUpGun : MonoBehaviour
             {
                 PickUp();
             }
+        }
+    }
+
+    void OnEquip()
+    {
+        if (equipped && Active == false)
+        {
+            gun.gameObject.SetActive(true);
+            ammoCount.SetActive(true);
+            Active = true;
+        }
+        else if (equipped && Active == true)
+        {
+            gun.gameObject.SetActive(false);
+            ammoCount.SetActive(false);
+            Active = false;
+        }
+    }
+
+    void OnEquip2()
+    {
+        if (equipped)
+        {
+            gun.gameObject.SetActive(false);
+            ammoCount.SetActive(false);
+            Active = false;
         }
     }
 
@@ -85,7 +112,7 @@ public class PickUpGun : MonoBehaviour
         ammoCount.SetActive(true);
 
         InventoryManager.Instance.Add(Item);
-
+        
         //Make weapon a child of the camera and move it to default position
         transform.SetParent(gunContainer);
         transform.localPosition = Vector3.zero;

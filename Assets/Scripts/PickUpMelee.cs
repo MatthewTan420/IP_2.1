@@ -13,15 +13,18 @@ public class PickUpMelee : MonoBehaviour
     public Melee meleeScript;
     public Rigidbody rb;
     public Collider coll;
+    public Transform melee;
     private Transform player;
-    private NewBehaviourScript script;
+    NewBehaviourScript script;
     private Transform meleeContainer, fpsCam;
     private GameObject ammoCount;
+    public GameObject pickUp;
 
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
 
     public bool equipped;
+    private bool Active = true;
     public static bool slotFull;
 
     public Item Item;
@@ -32,7 +35,6 @@ public class PickUpMelee : MonoBehaviour
         player = FindObjectOfType<NewBehaviourScript>().transform;
         script = player.GetComponent<NewBehaviourScript>();
         meleeContainer = FindObjectOfType<meleeContainer>().transform;
-        ammoCount = script.ammoCon;
         fpsCam = FindObjectOfType<Camera>().transform;
 
         if (!equipped)
@@ -50,13 +52,37 @@ public class PickUpMelee : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (equipped)
+        {
+            pickUp.SetActive(false);
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            pickUp.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            pickUp.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Pick up or drop the item
     /// </summary>
     void OnPickUp()
     {
         //Drop if equipped and "Q" is pressed
-        if (equipped == true)
+        if (equipped == true && Active == true)
         {
             Drop();
         }
@@ -71,6 +97,29 @@ public class PickUpMelee : MonoBehaviour
         }
     }
 
+    void OnEquip()
+    {
+        if (equipped)
+        {
+            melee.gameObject.SetActive(false);
+            Active = false;
+        }
+    }
+
+    void OnEquip2()
+    {
+        if (equipped && Active == false)
+        {
+            melee.gameObject.SetActive(true);
+            Active = true;
+        }
+        else if (equipped && Active == true)
+        {
+            melee.gameObject.SetActive(false);
+            Active = false;
+        }
+    }
+
     /// <summary>
     /// Pick up function
     /// </summary>
@@ -80,6 +129,7 @@ public class PickUpMelee : MonoBehaviour
         slotFull = true;
 
         meleeScript.holdGun = true;
+
 
         InventoryManager.Instance.Add(Item);
 

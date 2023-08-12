@@ -17,8 +17,6 @@ public class Melee : MonoBehaviour
 
     bool shooting, readyToShoot;
 
-    public ParticleSystem MuzzleFlash;
-
     void Awake()
     {
         readyToShoot = true;
@@ -53,7 +51,6 @@ public class Melee : MonoBehaviour
     void Shot()
     {
         readyToShoot = false;
-        MuzzleFlash.Play();
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {

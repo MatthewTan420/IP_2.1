@@ -5,10 +5,20 @@ using UnityEngine;
 public class InActive : MonoBehaviour
 {
     public GameObject inactive;
+    private Transform player;
+    public float pickUpRange;
 
-    // Start is called before the first frame update
     void Start()
     {
-        inactive.SetActive(false);
+        player = FindObjectOfType<NewBehaviourScript>().transform;
+    }
+
+    void OnPickUp()
+    {
+        Vector3 distanceToPlayer = player.position - transform.position;
+        if (distanceToPlayer.magnitude <= pickUpRange)
+        {
+            inactive.SetActive(false);
+        }
     }
 }
