@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<<< Updated upstream:Assets/New Material.mat
 --- !u!114 &-4716657969903109615
+========
+--- !u!114 &-8379918629856498195
+>>>>>>>> Stashed changes:Assets/Materials/New Material 3.mat
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +24,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: New Material 3
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _METALLICSPECGLOSSMAP
@@ -38,11 +42,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
+<<<<<<<< Updated upstream:Assets/New Material.mat
         m_Texture: {fileID: 2800000, guid: 1a2b671499c50874d9a8be2cfd5cdf78, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 2827e17ed2f83714f936e66ccae4fdd2, type: 3}
+========
+        m_Texture: {fileID: 2800000, guid: aff3ddb79a4359c43956777910551e43, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 3a7c11123416a4c4ca002685feb16f19, type: 3}
+>>>>>>>> Stashed changes:Assets/Materials/New Material 3.mat
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -58,6 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
+<<<<<<<< Updated upstream:Assets/New Material.mat
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -67,6 +80,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 2800000, guid: 7acb220ce944b1242b86feda1833ee2c, type: 3}
+========
+        m_Texture: {fileID: 2800000, guid: 68d108b2038d2bd4386689c0d8654dd8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: aff3ddb79a4359c43956777910551e43, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 2800000, guid: 6949ec3a49988674bb555a99868e3d37, type: 3}
+>>>>>>>> Stashed changes:Assets/Materials/New Material 3.mat
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -74,7 +98,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
+<<<<<<<< Updated upstream:Assets/New Material.mat
         m_Texture: {fileID: 2800000, guid: 99f4d978f1c61874cbfaeafdb449192e, type: 3}
+========
+        m_Texture: {fileID: 2800000, guid: b03bf50790c01a44195cbda3f8f24d9f, type: 3}
+>>>>>>>> Stashed changes:Assets/Materials/New Material 3.mat
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
