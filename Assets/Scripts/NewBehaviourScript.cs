@@ -22,6 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
     private bool sprint = false;
     private float curSpeed;
     private float curSprint;
+    private bool PlayerGrounded = true;
 
     public Transform camera;
     public Rigidbody rb;
@@ -35,12 +36,6 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject ammo;
     public GameObject ammoCon;
     public TextMeshProUGUI ammoCount;
-    GameObject melee;
-    public GameObject meleeCon;
-    Shoot gunScript;
-    PickUpGun pickScriptG;
-    Melee meleeScript;
-    PickUpMelee pickScriptM;
 
     public float Health;
     public static float curHealth;
@@ -85,9 +80,10 @@ public class NewBehaviourScript : MonoBehaviour
     }
     void OnJump(InputValue value)
     {
-        if (isStuck == false)
+        if (isStuck == false && PlayerGrounded == true)
         {
             rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+            PlayerGrounded = false;
         }
     }
 
@@ -143,6 +139,10 @@ public class NewBehaviourScript : MonoBehaviour
             Menu.SetActive(true);
             isLock = false;
             isTeleport = false;
+        }
+        else if (collision.gameObject.tag == "Untagged")
+        {
+            PlayerGrounded = true;
         }
     }
 

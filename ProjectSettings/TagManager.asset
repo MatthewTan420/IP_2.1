@@ -6,17 +6,18 @@ TagManager:
   tags:
   - Item
   - Quest
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - NPC
+  - Enemy
+  - Companion
   - 
   - 
   - 

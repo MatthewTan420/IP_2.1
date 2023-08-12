@@ -14,8 +14,10 @@ public class Melee : MonoBehaviour
     public float range, timeBetweenShots;
     public int dmg;
     public bool holdGun;
+    public AudioSource swing;
 
     bool shooting, readyToShoot;
+    public PickUpMelee pickM;
 
     void Awake()
     {
@@ -24,7 +26,7 @@ public class Melee : MonoBehaviour
 
     public void SetUp()
     {
-        holdGun = true;
+        holdGun = false;
     }
 
     /// <summary>
@@ -32,17 +34,18 @@ public class Melee : MonoBehaviour
     /// </summary>
     void OnFire()
     {
-        
-        if (holdGun == false)
+        if (pickM.Active == true)
         {
-            return;
-        }
-        
-        if (readyToShoot)
-        {
-            Shot();
-        }
+            if (holdGun == false)
+            {
+                return;
+            }
 
+            if (readyToShoot)
+            {
+                Shot();
+            }
+        }
     }
 
     /// <summary>
@@ -51,12 +54,17 @@ public class Melee : MonoBehaviour
     void Shot()
     {
         readyToShoot = false;
+        swing.Play();
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
             if (hit.transform.tag == "Enemy")
             {
                 hit.transform.GetComponent<Enemy>().Damage(dmg);
+            }
+            else if (hit.transform.tag == "Crawler")
+            {
+                hit.transform.GetComponent<Crawler>().Damage(dmg);
             }
         }
         Invoke(nameof(ResetShot), timeBetweenShots);
