@@ -65,6 +65,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     public GameObject questCon;
     public TextMeshProUGUI questText;
+    public GameObject dialCon;
+    public TextMeshProUGUI dialText;
 
     /// <summary>
     /// Controls the player actions and movements
