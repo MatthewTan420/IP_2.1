@@ -26,7 +26,7 @@ public class SpecialDoor : MonoBehaviour
     {
         NewItems2 = InventoryManager.NewItems2;
         Items2 = InventoryManager.Items2;
-        player = FindObjectOfType<NewBehaviourScript>().transform;
+        //player = FindObjectOfType<NewBehaviourScript>().transform;
         pickUp.SetActive(false);
     }
 
@@ -34,6 +34,7 @@ public class SpecialDoor : MonoBehaviour
     {
         Items = InventoryManager.Instance.Items;
         NewItems = InventoryManager.Instance.NewItems;
+        player = FindObjectOfType<NewBehaviourScript>().transform;
 
         if (isLock == false)
         {
