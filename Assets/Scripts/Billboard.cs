@@ -16,6 +16,13 @@ public class Billboard : MonoBehaviour
         camera = script.camera;
     }
 
+    void Update()
+    {
+        player = FindObjectOfType<NewBehaviourScript>().transform;
+        script = player.GetComponent<NewBehaviourScript>();
+        camera = script.camera;
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
