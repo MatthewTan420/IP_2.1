@@ -36,7 +36,7 @@ public class PickUpMelee : MonoBehaviour
         script = player.GetComponent<NewBehaviourScript>();
         meleeContainer = FindObjectOfType<meleeContainer>().transform;
         fpsCam = FindObjectOfType<Camera>().transform;
-
+        pickUp.SetActive(false);
         if (!equipped)
         {
             meleeScript.enabled = false;

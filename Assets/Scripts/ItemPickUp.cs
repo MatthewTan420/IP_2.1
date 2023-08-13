@@ -13,10 +13,27 @@ public class ItemPickUp : MonoBehaviour
     public Item Item;
     public Transform player;
     public float pickUpRange;
+    public GameObject pickUp;
 
     void Awake()
     {
-        
+        pickUp.SetActive(false);
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            pickUp.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            pickUp.SetActive(false);
+        }
     }
 
     /// <summary>
