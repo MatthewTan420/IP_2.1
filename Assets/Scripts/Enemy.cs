@@ -28,7 +28,11 @@ public class Enemy : MonoBehaviour
     public float dmg;
     private bool isDead = false;
 
-
+    public AudioSource idle;
+    public AudioSource spot;
+    public AudioSource death;
+    public AudioSource atk;
+    public AudioSource hit;
 
     private void Awake()
     {
@@ -52,6 +56,7 @@ public class Enemy : MonoBehaviour
             }
             else if ((playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
             {
+                spot.Play();
                 ChasePlayer();
             }
             else if ((playerInSightRange && playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
@@ -60,14 +65,17 @@ public class Enemy : MonoBehaviour
             }
             else if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
             {
+                spot.Play();
                 ChaseNPC();
             }
             else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
             {
+                spot.Play();
                 ChaseNPC();
             }
             else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
             {
+                spot.Play();
                 ChaseNPC();
             }
             else if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
@@ -100,6 +108,7 @@ public class Enemy : MonoBehaviour
             GetComponent<Animator>().SetTrigger("isIdle");
             GetComponent<Animator>().ResetTrigger("isWalk");
             GetComponent<Animator>().ResetTrigger("isRun");
+            idle.Play();
             Invoke(nameof(SearchWalkPoint), 3.0f);
         }
 
@@ -162,6 +171,7 @@ public class Enemy : MonoBehaviour
             GetComponent<Animator>().SetTrigger("isAtk");
             player.GetComponent<NewBehaviourScript>().Damage(dmg);
             alreadyAttacked = true;
+            atk.Play();
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
@@ -190,6 +200,7 @@ public class Enemy : MonoBehaviour
             GetComponent<Animator>().SetTrigger("isAtk");
             NPC.GetComponent<NPC>().Die();
             alreadyAttacked = true;
+            atk.Play();
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
@@ -205,6 +216,10 @@ public class Enemy : MonoBehaviour
     public void Damage(int dmg)
     {
         health -= dmg;
+        if (health > 0)
+        {
+            hit.Play();
+        }
         if (health <= 0)
         {
             agent.speed = 0.0f;
@@ -222,6 +237,7 @@ public class Enemy : MonoBehaviour
         GetComponent<Animator>().ResetTrigger("isRun");
         GetComponent<Animator>().ResetTrigger("isWalk");
         GetComponent<Animator>().ResetTrigger("isIdle");
+        death.Play();
     }
 
     private void DestroyEnemy()

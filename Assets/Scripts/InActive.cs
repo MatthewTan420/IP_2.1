@@ -7,6 +7,7 @@ public class InActive : MonoBehaviour
     public GameObject inactive;
     private Transform player;
     public float pickUpRange;
+    public AudioSource sound;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class InActive : MonoBehaviour
         if (distanceToPlayer.magnitude <= pickUpRange)
         {
             inactive.SetActive(false);
+            sound.Play();
         }
     }
 }

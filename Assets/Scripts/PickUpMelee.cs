@@ -24,7 +24,7 @@ public class PickUpMelee : MonoBehaviour
     public float dropForwardForce, dropUpwardForce;
 
     public bool equipped;
-    private bool Active = true;
+    public bool Active = true;
     public static bool slotFull;
 
     public Item Item;
@@ -36,7 +36,7 @@ public class PickUpMelee : MonoBehaviour
         script = player.GetComponent<NewBehaviourScript>();
         meleeContainer = FindObjectOfType<meleeContainer>().transform;
         fpsCam = FindObjectOfType<Camera>().transform;
-
+        pickUp.SetActive(false);
         if (!equipped)
         {
             meleeScript.enabled = false;

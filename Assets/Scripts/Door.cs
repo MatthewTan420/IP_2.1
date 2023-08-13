@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public AudioSource enter;
+    public AudioSource exit;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             GetComponent<Animator>().SetTrigger("Enter");
+            enter.Play();
         }
     }
 
@@ -17,6 +21,7 @@ public class Door : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             GetComponent<Animator>().SetTrigger("Exit");
+            exit.Play();
         }
     }
 }
