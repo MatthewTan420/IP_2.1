@@ -54,6 +54,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject UI;
     public GameObject Menu;
     public GameObject DeathMenu;
+    public bool isMenu = false;
     public InventoryManager invenScript;
 
     public bool isStuck = false;

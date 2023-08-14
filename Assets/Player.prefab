@@ -2734,6 +2734,7 @@ MonoBehaviour:
   ItemContent: {fileID: 2629054295584644882}
   InventoryItem: {fileID: 4754847282622607226, guid: 04276148c9237c64baf27520fb15844f,
     type: 3}
+  script: {fileID: 8071899077241845217}
   isTeleport: 0
 --- !u!1 &4446506690821088440
 GameObject:
@@ -4228,6 +4229,7 @@ MonoBehaviour:
   UI: {fileID: 1899896383211603558}
   Menu: {fileID: 7483271613877625831}
   DeathMenu: {fileID: 4446506690821088440}
+  isMenu: 0
   invenScript: {fileID: 6922322414451806369}
   isStuck: 0
   light: {fileID: 1193207395511516661}
