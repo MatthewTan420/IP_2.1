@@ -239,6 +239,9 @@ public class NewBehaviourScript : MonoBehaviour
         }
         healthbar.SetMaxHealth(Health);
         healthbar.SetHealth(curHealth);
+        DeathMenu.SetActive(false);
+        UI.SetActive(true);
+        isLock = true;
     }
 
     /// <summary>
