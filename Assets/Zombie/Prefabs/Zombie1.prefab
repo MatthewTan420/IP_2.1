@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4015927865308975435}
   m_Layer: 8
   m_Name: Z_L_LegThigh
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 3095270377931777224}
   m_Layer: 8
   m_Name: Base HumanPelvis
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 6240894085325587095}
   m_Layer: 8
   m_Name: Z_L_Upperarm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 4683049904492540737}
   m_Layer: 8
   m_Name: Z_R_LegThigh
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1049,7 +1049,7 @@ GameObject:
   - component: {fileID: 757158233128373002}
   m_Layer: 8
   m_Name: Z_L_Forearm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 6120544034525914399}
   m_Layer: 8
   m_Name: Z_Head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1746,7 +1746,7 @@ GameObject:
   - component: {fileID: 6666629746660635108}
   m_Layer: 8
   m_Name: Z_R_LegCalf
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1866,7 +1866,7 @@ GameObject:
   - component: {fileID: 8650658897552531052}
   m_Layer: 8
   m_Name: Z_R_Forearm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2018,7 +2018,7 @@ GameObject:
   - component: {fileID: 4436183059212487803}
   m_Layer: 8
   m_Name: Z_Hip
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2256,13 +2256,13 @@ MonoBehaviour:
   playerInAttackRange: 0
   NPCInSightRange: 0
   NPCInAttackRange: 0
-  health: 5
+  health: 4
   dmg: 1
-  idle: {fileID: 0}
-  spot: {fileID: 0}
-  death: {fileID: 0}
-  atk: {fileID: 0}
-  hit: {fileID: 0}
+  idle: {fileID: 7179144361263600009}
+  spot: {fileID: 5342095452236246854}
+  death: {fileID: 7368554367791052977}
+  atk: {fileID: 2157991308112829533}
+  hit: {fileID: 377069904561801340}
 --- !u!1 &4710940672626480558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,7 +2275,7 @@ GameObject:
   - component: {fileID: 5919840380852676749}
   m_Layer: 8
   m_Name: Z_R_Upperarm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2684,7 +2684,7 @@ GameObject:
   - component: {fileID: 1121011161581445621}
   m_Layer: 8
   m_Name: Z_L_LegCalf
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2965,7 +2965,7 @@ GameObject:
   - component: {fileID: 5139761948278668691}
   m_Layer: 8
   m_Name: Z_Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3085,7 +3085,7 @@ GameObject:
   - component: {fileID: 2193966762700056535}
   m_Layer: 8
   m_Name: Z_L_ArmPalm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3186,7 +3186,7 @@ GameObject:
   - component: {fileID: 8901803093505179118}
   m_Layer: 8
   m_Name: Z_R_ArmPalm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3287,7 +3287,7 @@ GameObject:
   - component: {fileID: 4635275852841047606}
   m_Layer: 8
   m_Name: Z_BodyTop
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
