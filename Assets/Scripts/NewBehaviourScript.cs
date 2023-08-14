@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -181,6 +182,13 @@ public class NewBehaviourScript : MonoBehaviour
     public void unLock()
     {
         isLock = false;
+    }
+
+    public void ReloadScene()
+    {
+        // use the SceneManager to load the specified scene index.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Start();
     }
 
     /// <summary>
