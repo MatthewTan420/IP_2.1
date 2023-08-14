@@ -18,6 +18,7 @@ public class PickUpGun : MonoBehaviour
     NewBehaviourScript script;
     private Transform gunContainer, fpsCam;
     private GameObject ammoCount;
+    public GameObject pickUp;
 
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
@@ -37,7 +38,7 @@ public class PickUpGun : MonoBehaviour
         ammoCount = script.ammoCon;
         ammoCount.SetActive(false);
         fpsCam = FindObjectOfType<Camera>().transform;
-        
+        pickUp.SetActive(false);
         if (!equipped)
         {
             gunScript.enabled = false;
@@ -50,6 +51,30 @@ public class PickUpGun : MonoBehaviour
             rb.isKinematic = true;
             coll.isTrigger = true;
             slotFull = true;
+        }
+    }
+
+    private void Update()
+    {
+        if (equipped)
+        {
+            pickUp.SetActive(false);
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            pickUp.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            pickUp.SetActive(false);
         }
     }
 

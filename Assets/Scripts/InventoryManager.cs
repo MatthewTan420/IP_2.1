@@ -20,6 +20,7 @@ public class InventoryManager : MonoBehaviour
     public Transform ItemContent;
     public GameObject InventoryItem;
     private int count;
+    public NewBehaviourScript script;
 
     public bool isTeleport;
 
@@ -35,6 +36,14 @@ public class InventoryManager : MonoBehaviour
         {
             Items = Items2;
             NewItems = NewItems2;
+        }
+
+        if (script.isMenu == true)
+        {
+            Items = new List<Item>();
+            NewItems = new List<Item>();
+            Items2 = new List<Item>();
+            NewItems2 = new List<Item>();
         }
     }
 
