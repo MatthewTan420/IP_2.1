@@ -57,6 +57,13 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject DeathMenu;
     public bool isMenu = false;
     public InventoryManager invenScript;
+    public GameObject noteOne;
+    public GameObject noteTwo;
+    public GameObject noteThree;
+    public GameObject noteFour;
+    public GameObject noteFive;
+    public GameObject noteSix;
+    public GameObject noteSeven;
 
     public bool isStuck = false;
     public static bool isTeleport = false;
@@ -328,4 +335,5 @@ public class NewBehaviourScript : MonoBehaviour
                 + new Vector3(0, rotationInput.y, 0) * rotationSpeed);
         }
     }
+
 }
