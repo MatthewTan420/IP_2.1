@@ -24,7 +24,7 @@ public class PickUpGun : MonoBehaviour
     public float dropForwardForce, dropUpwardForce;
 
     public bool equipped;
-    private bool Active = true;
+    public bool Active = true;
     public static bool slotFull;
 
     public Item Item;

@@ -187,8 +187,8 @@ public class NewBehaviourScript : MonoBehaviour
     public void ReloadScene()
     {
         // use the SceneManager to load the specified scene index.
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Start();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>
@@ -242,6 +242,8 @@ public class NewBehaviourScript : MonoBehaviour
         DeathMenu.SetActive(false);
         UI.SetActive(true);
         isLock = true;
+        isDead = false;
+        isStuck = false;
     }
 
     /// <summary>
