@@ -29,7 +29,9 @@ public class Crawler : MonoBehaviour
     private bool isDead = false;
     public Collider trigger;
 
-
+    public AudioSource death;
+    public AudioSource atk;
+    public AudioSource hit;
 
     private void Awake()
     {
@@ -104,7 +106,7 @@ public class Crawler : MonoBehaviour
         if (walkPointSet)
         {
             agent.SetDestination(walkPoint);
-            agent.speed = 2.0f;
+            agent.speed = 1.0f;
         }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
@@ -137,7 +139,7 @@ public class Crawler : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
-        agent.speed = 3.5f;
+        agent.speed = 3f;
     }
 
     /// <summary>
@@ -153,6 +155,7 @@ public class Crawler : MonoBehaviour
         {
             player.GetComponent<NewBehaviourScript>().Damage(dmg);
             alreadyAttacked = true;
+            atk.Play();
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
@@ -176,6 +179,7 @@ public class Crawler : MonoBehaviour
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
+            atk.Play();
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
@@ -191,6 +195,7 @@ public class Crawler : MonoBehaviour
     public void Damage(int dmg)
     {
         health -= dmg;
+        hit.Play();
         if (health <= 0)
         {
             agent.speed = 0.0f;
@@ -206,7 +211,7 @@ public class Crawler : MonoBehaviour
         isDead = true;
         trigger.enabled = false;
         player.GetComponent<NewBehaviourScript>().isStuck = false;
-
+        death.Play();
         if (Companion != null)
         {
             Companion.GetComponent<Companion>().agent.speed = 3.0f;

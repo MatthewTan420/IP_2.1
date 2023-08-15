@@ -22,14 +22,11 @@ public class Shoot : MonoBehaviour
 
     private TextMeshProUGUI Ammo;
     public ParticleSystem MuzzleFlash;
+    public AudioSource bang;
 
     public NewBehaviourScript script;
+    public PickUpGun pickG;
     public Transform player;
-
-    void Awake()
-    {
-        
-    }
 
     void Start()
     {
@@ -42,11 +39,6 @@ public class Shoot : MonoBehaviour
         Ammo.text = bulletsLeft + "/" + magazineSize;
     }
 
-    void Update()
-    {
-        
-    }
-
     public void SetUp()
     {
         holdGun = false;
@@ -57,16 +49,18 @@ public class Shoot : MonoBehaviour
     /// </summary>
     void OnFire()
     {
-        if (holdGun == false)
+        if (pickG.Active == true)
         {
-            return;
-        }
+            if (holdGun == false)
+            {
+                return;
+            }
 
-        if ((readyToShoot && reloading == false) && bulletsLeft > 0)
-        {
-            Shot();
+            if ((readyToShoot && reloading == false) && bulletsLeft > 0)
+            {
+                Shot();
+            }
         }
-        
     }
 
     /// <summary>
@@ -76,6 +70,7 @@ public class Shoot : MonoBehaviour
     {
         readyToShoot = false;
         MuzzleFlash.Play();
+        bang.Play();
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
