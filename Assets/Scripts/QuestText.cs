@@ -11,7 +11,7 @@ public class QuestText : MonoBehaviour
     public TextMeshProUGUI questText;
     public string whatsQuest;
     public bool isQuest = true;
-
+    //test
     // Start is called before the first frame update
     void Start()
     {
