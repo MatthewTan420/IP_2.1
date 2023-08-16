@@ -4,11 +4,16 @@
  * Description: 
  */
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
+    private string currentState;
+    private string nextState;
+
     public NavMeshAgent agent;
     private Transform enemy;
     public LayerMask whatIsGround, whatIsEnemy;
@@ -21,28 +26,77 @@ public class NPC : MonoBehaviour
 
     private void Awake()
     {
-        enemy = FindObjectOfType<Enemy>().transform;
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void SwitchState()
+    {
+        StartCoroutine(currentState);
+    }
+
+    IEnumerator Idle()
+    {
+        bool isIdle = true;
+        while (isIdle)
+        {
+            GetComponent<Animator>().SetTrigger("isIdle");
+            GetComponent<Animator>().ResetTrigger("isRun");
+            GetComponent<Animator>().ResetTrigger("isDead");
+
+            if (enemyInSightRange)
+            {
+                nextState = "Chase";
+                isIdle = false;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        SwitchState();
+    }
+
+    IEnumerator Chase()
+    {
+        GetComponent<Animator>().SetTrigger("isRun");
+        GetComponent<Animator>().ResetTrigger("isIdle");
+        GetComponent<Animator>().ResetTrigger("isDead");
+
+        bool isChasing = true;
+
+        while (isChasing)
+        {
+            enemy = FindObjectOfType<Enemy>().transform;
+
+            Vector3 normDir = (enemy.position - transform.position).normalized;
+            //normDir = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * normDir;
+            MoveToPos(transform.position - (normDir * displacementDist));
+
+            // some example of how the switching will work 
+            if (!enemyInSightRange)
+            {
+                nextState = "Idle";
+                isChasing = false;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        SwitchState();
+    }
+
+    void Start()
+    {
+        currentState = "Idle";
+        nextState = currentState;
+        SwitchState();
     }
 
     private void Update()
     {
-        if (isDead == false)
+        enemyInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsEnemy);
+
+        if (nextState != currentState)
         {
-            enemyInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsEnemy);
-            
-            if (enemyInSightRange)
-            {
-                enemy = FindObjectOfType<Enemy>().transform;
-                RunNPC();
-                
-            }
-            else
-            {
-                Idling();
-            }
+            currentState = nextState;
         }
-        else
+
+        if (isDead == true)
         {
             Invoke(nameof(DestroyEnemy), 5.0f);
             GetComponent<Animator>().SetTrigger("isDead");
@@ -50,23 +104,6 @@ public class NPC : MonoBehaviour
             GetComponent<Animator>().ResetTrigger("isIdle");
             return;
         }
-    }
-
-    private void Idling()
-    {
-        GetComponent<Animator>().SetTrigger("isIdle");
-        GetComponent<Animator>().ResetTrigger("isRun");
-        GetComponent<Animator>().ResetTrigger("isDead");
-    }
-
-    private void RunNPC()
-    {
-        Vector3 normDir = (enemy.position - transform.position).normalized;
-        normDir = Quaternion.AngleAxis(Random.Range(-90, 90), Vector3.up) * normDir;
-        MoveToPos(transform.position - (normDir * displacementDist));
-        GetComponent<Animator>().SetTrigger("isRun");
-        GetComponent<Animator>().ResetTrigger("isIdle");
-        GetComponent<Animator>().ResetTrigger("isDead");
     }
 
     private void MoveToPos(Vector3 pos)

@@ -59,11 +59,9 @@ public class NewBehaviourScript : MonoBehaviour
     public InventoryManager invenScript;
     public GameObject noteOne;
     public GameObject noteTwo;
-    public GameObject noteThree;
     public GameObject noteFour;
     public GameObject noteFive;
     public GameObject noteSix;
-    public GameObject noteSeven;
 
     public bool isStuck = false;
     public static bool isTeleport = false;

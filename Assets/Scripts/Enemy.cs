@@ -4,11 +4,17 @@
  * Description: 
  */
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
+    private string currentState;
+    private string nextState;
+
     public NavMeshAgent agent;
     public Transform player;
     private Transform NPC;
@@ -33,99 +39,216 @@ public class Enemy : MonoBehaviour
     public AudioSource death;
     public AudioSource atk;
     public AudioSource hit;
+    public VisualEffect blood;
 
-    private void Awake()
+    private void SwitchState()
     {
-        agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(currentState);
     }
 
-    private void Update()
+    IEnumerator Idle()
     {
-        player = FindObjectOfType<NewBehaviourScript>().transform;
-        if (isDead == false)
+        if (!isDead)
         {
-            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            while (currentState == "Idle")
+            {
+                if (!walkPointSet)
+                {
+                    GetComponent<Animator>().SetTrigger("isIdle");
+                    GetComponent<Animator>().ResetTrigger("isWalk");
+                    GetComponent<Animator>().ResetTrigger("isRun");
+                    GetComponent<Animator>().ResetTrigger("isAtk");
+                    idle.Play();
+                    Invoke(nameof(SearchWalkPoint), 3.0f);
+                }
 
-            NPCInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsNPC);
-            NPCInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsNPC);
+                if (walkPointSet)
+                {
+                    agent.SetDestination(walkPoint);
+                    agent.speed = 2.0f;
+                    GetComponent<Animator>().SetTrigger("isWalk");
+                    GetComponent<Animator>().ResetTrigger("isRun");
+                    GetComponent<Animator>().ResetTrigger("isIdle");
+                    GetComponent<Animator>().ResetTrigger("isAtk");
+                }
 
-            if ((!playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
-            {
-                Patrolling();
+                Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+                if (distanceToWalkPoint.magnitude < 1f)
+                {
+                    walkPointSet = false;
+                }
+
+
+                if ((playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Chase";
+                }
+                else if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "ChaseN";
+                }
+                else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "ChaseN";
+                }
+                else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "ChaseN";
+                }
+                yield return new WaitForEndOfFrame();
             }
-            else if ((playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
-            {
-                spot.Play();
-                ChasePlayer();
-            }
-            else if ((playerInSightRange && playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
-            {
-                AttackPlayer();
-            }
-            else if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
-            {
-                spot.Play();
-                ChaseNPC();
-            }
-            else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
-            {
-                spot.Play();
-                ChaseNPC();
-            }
-            else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
-            {
-                spot.Play();
-                ChaseNPC();
-            }
-            else if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
-            {
-                AttackNPC();
-            }
-            else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
-            {
-                AttackNPC();
-            }
-            else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
-            {
-                AttackNPC();
-            }
-        }
-        else
-        {
-            Invoke(nameof(DestroyEnemy), 5.0f);
-            return;
+            SwitchState();
         }
     }
 
-    /// <summary>
-    /// Enemy are just walking and standing still
-    /// </summary>
-    private void Patrolling()
+    IEnumerator Chase()
     {
-        if (!walkPointSet)
+        if (!isDead)
         {
-            GetComponent<Animator>().SetTrigger("isIdle");
+            agent.speed = 3.5f;
+            GetComponent<Animator>().SetTrigger("isRun");
             GetComponent<Animator>().ResetTrigger("isWalk");
-            GetComponent<Animator>().ResetTrigger("isRun");
-            idle.Play();
-            Invoke(nameof(SearchWalkPoint), 3.0f);
-        }
-
-        if (walkPointSet)
-        {
-            agent.SetDestination(walkPoint);
-            agent.speed = 2.0f;
-            GetComponent<Animator>().SetTrigger("isWalk");
-            GetComponent<Animator>().ResetTrigger("isRun");
             GetComponent<Animator>().ResetTrigger("isIdle");
+            GetComponent<Animator>().ResetTrigger("isAtk");
+
+            bool isChasing = true;
+
+            while (isChasing)
+            {
+                agent.SetDestination(player.position);
+
+                // some example of how the switching will work 
+                if ((!playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Idle";
+                    isChasing = false;
+                }
+                else if ((playerInSightRange && playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Atk";
+                    isChasing = false;
+                }
+                else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "ChaseN";
+                    isChasing = false;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+            SwitchState();
         }
+    }
 
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        if(distanceToWalkPoint.magnitude < 1f)
+    IEnumerator Atk()
+    {
+        if (!isDead)
         {
-            walkPointSet = false;
+            GetComponent<Animator>().SetTrigger("isAtk");
+            GetComponent<Animator>().ResetTrigger("isRun");
+            GetComponent<Animator>().ResetTrigger("isWalk");
+            GetComponent<Animator>().ResetTrigger("isIdle");
+            transform.LookAt(player);
+
+            bool isAtk = true;
+
+            while (isAtk)
+            {
+                agent.SetDestination(transform.position);
+                if (!alreadyAttacked)
+                {
+                    player.GetComponent<NewBehaviourScript>().Damage(dmg);
+                    alreadyAttacked = true;
+                    atk.Play();
+                    Invoke(nameof(ResetAttack), timeBetweenAttacks);
+                }
+
+                if ((playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Chase";
+                    isAtk = false;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            SwitchState();
+        }
+    }
+
+    IEnumerator ChaseN()
+    {
+        if (!isDead)
+        {
+            agent.speed = 3.5f;
+
+            GetComponent<Animator>().SetTrigger("isRun");
+            GetComponent<Animator>().ResetTrigger("isWalk");
+            GetComponent<Animator>().ResetTrigger("isIdle");
+            GetComponent<Animator>().ResetTrigger("isAtk");
+
+            bool isChasing = true;
+
+            while (isChasing)
+            {
+                NPC = FindObjectOfType<NPC>().transform;
+                agent.SetDestination(NPC.position);
+
+                // some example of how the switching will work 
+                if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
+                {
+                    nextState = "AtkN";
+                    isChasing = false;
+                }
+                else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
+                {
+                    nextState = "AtkN";
+                    isChasing = false;
+                }
+                else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
+                {
+                    nextState = "AtkN";
+                    isChasing = false;
+                }
+                else if ((!playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Idle";
+                    isChasing = false;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+            SwitchState();
+        }
+    }
+
+    IEnumerator AtkN()
+    {
+        if (!isDead)
+        {
+            GetComponent<Animator>().SetTrigger("isAtk");
+            //transform.LookAt(NPC);
+
+            bool isAtk = true;
+
+            while (isAtk)
+            {
+                agent.SetDestination(transform.position);
+                if (!alreadyAttacked)
+                {
+                    NPC.GetComponent<NPC>().Die();
+                    alreadyAttacked = true;
+                    atk.Play();
+                    Invoke(nameof(ResetAttack), timeBetweenAttacks);
+                }
+
+                if ((!playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Idle";
+                    isAtk = false;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            SwitchState();
         }
     }
 
@@ -145,91 +268,27 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Move towards player if player come too close
-    /// </summary>
-    private void ChasePlayer()
-    {
-        agent.SetDestination(player.position);
-        agent.speed = 3.5f;
-        GetComponent<Animator>().SetTrigger("isRun");
-        GetComponent<Animator>().ResetTrigger("isWalk");
-        GetComponent<Animator>().ResetTrigger("isIdle");
-    }
-
-    /// <summary>
-    /// Attacks player if player is within range
-    /// </summary>
-    private void AttackPlayer()
-    {
-        agent.SetDestination(transform.position);
-
-        transform.LookAt(player);
-
-        if (!alreadyAttacked)
-        {
-            GetComponent<Animator>().SetTrigger("isAtk");
-            player.GetComponent<NewBehaviourScript>().Damage(dmg);
-            alreadyAttacked = true;
-            atk.Play();
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-
-    private void ChaseNPC()
-    {
-        NPC = FindObjectOfType<NPC>().transform;
-        agent.SetDestination(NPC.position);
-        agent.speed = 3.5f;
-        GetComponent<Animator>().SetTrigger("isRun");
-        GetComponent<Animator>().ResetTrigger("isWalk");
-        GetComponent<Animator>().ResetTrigger("isIdle");
-    }
-
-    /// <summary>
-    /// Attacks NPC if NPC is within range
-    /// </summary>
-    private void AttackNPC()
-    {
-        agent.SetDestination(transform.position);
-
-        transform.LookAt(NPC);
-
-        if (!alreadyAttacked)
-        {
-            GetComponent<Animator>().SetTrigger("isAtk");
-            NPC.GetComponent<NPC>().Die();
-            alreadyAttacked = true;
-            atk.Play();
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-
     private void ResetAttack()
     {
         alreadyAttacked = false;
     }
 
-    /// <summary>
-    /// Zombie takes damage
-    /// </summary>
     public void Damage(int dmg)
     {
         health -= dmg;
         if (health > 0)
         {
             hit.Play();
+            blood.Play();
         }
         if (health <= 0)
         {
             agent.speed = 0.0f;
             Died();
+            blood.Play();
         }
     }
 
-    /// <summary>
-    /// Zombie dies when health is at 0
-    /// </summary>
     private void Died()
     {
         isDead = true;
@@ -237,12 +296,38 @@ public class Enemy : MonoBehaviour
         GetComponent<Animator>().ResetTrigger("isRun");
         GetComponent<Animator>().ResetTrigger("isWalk");
         GetComponent<Animator>().ResetTrigger("isIdle");
+        GetComponent<Animator>().ResetTrigger("isAtk");
         death.Play();
+        Invoke(nameof(DestroyEnemy), 5.0f);
+        return;
     }
 
     private void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        currentState = "Idle";
+        nextState = currentState;
+        SwitchState();
+    }
+
+    private void Update()
+    {
+        player = FindObjectOfType<NewBehaviourScript>().transform;
+
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        NPCInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsNPC);
+        NPCInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsNPC);
+
+        if (nextState != currentState)
+        {
+            currentState = nextState;
+        }
     }
 
     private void OnDrawGizmosSelected()
