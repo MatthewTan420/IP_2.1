@@ -1,3 +1,9 @@
+/*
+ * Author: 
+ * Date: 
+ * Description: 
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +17,7 @@ public class QuestText : MonoBehaviour
     public TextMeshProUGUI questText;
     public string whatsQuest;
     public bool isQuest = true;
-    //test
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +28,9 @@ public class QuestText : MonoBehaviour
         questCon.SetActive(false);
     }
 
+    /// <summary>
+    /// This opens the quest/dialogue tag
+    /// </summary>
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player" && isQuest)
