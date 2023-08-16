@@ -6,7 +6,7 @@ public class Door : MonoBehaviour
 {
     public AudioSource enter;
     public AudioSource exit;
-
+    //test
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
