@@ -10,6 +10,7 @@ public class QuestText : MonoBehaviour
     public GameObject questCon;
     public TextMeshProUGUI questText;
     public string whatsQuest;
+    public bool isQuest = true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,18 +24,17 @@ public class QuestText : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && isQuest)
         {
             questCon.SetActive(true);
             questText.text = whatsQuest;
+            Invoke(nameof(Inactive), 5.0f);
+            isQuest = false;
         }
     }
 
-    void OnTriggerExit(Collider col)
+    void Inactive()
     {
-        if (col.gameObject.tag == "Player")
-        {
-            questCon.SetActive(false);
-        }
+        questCon.SetActive(false);
     }
 }
