@@ -11,16 +11,29 @@ using UnityEngine.AI;
 
 public class Companion : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    private string currentState;
+    private string nextState;
+
+    public UnityEngine.AI.NavMeshAgent agent;
     public Transform player;
     private Transform enemy;
-    private bool isReady = false;
+    public bool isReady = false;
     Vector3 dest;
     public float pickUpRange, sightRange;
     private bool enemyInSightRange;
     public LayerMask whatIsGround, whatIsEnemy;
     public int dmg;
     bool alreadyAttacked;
+
+    public AudioSource woof;
+    public AudioSource growl;
+    float timerVal = 0;
+    float timerVal1 = 6;
+
+    private void SwitchState()
+    {
+        StartCoroutine(currentState);
+    }
 
     void Awake()
     {
@@ -30,49 +43,138 @@ public class Companion : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<NewBehaviourScript>().transform;
+        currentState = "Idle";
+        nextState = currentState;
+        SwitchState();
     }
-    /// <summary>
-    /// Companions follow player if he wants it to
-    /// </summary>
-    void Update()
+
+    IEnumerator Idle()
     {
-        if (isReady == true)
+        GetComponent<Animator>().SetTrigger("isIdle");
+        GetComponent<Animator>().ResetTrigger("isFollow");
+        GetComponent<Animator>().ResetTrigger("isAtk");
+
+        bool isIdle = true;
+        while (isIdle)
         {
-            enemyInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsEnemy);
+            if (isReady)
+            {
+                nextState = "Follow";
+                isIdle = false;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        SwitchState();
+    }
+
+    IEnumerator Follow()
+    {
+        bool isFollow = true;
+
+        while (isFollow)
+        {
+            agent.SetDestination(player.position);
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                GetComponent<Animator>().SetTrigger("isIdle");
+                GetComponent<Animator>().ResetTrigger("isFollow");
+                GetComponent<Animator>().ResetTrigger("isAtk");
+            }
+            else
+            {
+                GetComponent<Animator>().SetTrigger("isFollow");
+                GetComponent<Animator>().ResetTrigger("isIdle");
+                GetComponent<Animator>().ResetTrigger("isAtk");
+            }
+
             if (enemyInSightRange)
             {
-                enemy = FindObjectOfType<Enemy>().transform;
-                dest = enemy.position;
-                agent.destination = dest;
-                if (agent.remainingDistance <= agent.stoppingDistance)
+                nextState = "Chase";
+                isFollow = false;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        SwitchState();
+    }
+
+    IEnumerator Chase()
+    {
+        GetComponent<Animator>().SetTrigger("isFollow");
+        GetComponent<Animator>().ResetTrigger("isIdle");
+        GetComponent<Animator>().ResetTrigger("isAtk");
+
+        bool isChase = true;
+
+        while (isChase)
+        {
+            enemy = FindObjectOfType<Enemy>().transform;
+            dest = enemy.position;
+            agent.destination = dest;
+
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                nextState = "Atk";
+                isChase = false;
+            }
+
+            if (enemy.transform == null)
+            {
+                Debug.Log("e");
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        SwitchState();
+    }
+
+    IEnumerator Atk()
+    {
+        GetComponent<Animator>().SetTrigger("isAtk");
+        GetComponent<Animator>().ResetTrigger("isIdle");
+        GetComponent<Animator>().ResetTrigger("isFollow");
+
+        bool isAtk = true;
+
+        while (isAtk)
+        {
+            enemy = FindObjectOfType<Enemy>().transform;
+
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!alreadyAttacked)
                 {
-                    GetComponent<Animator>().SetTrigger("isAtk");
-                    GetComponent<Animator>().ResetTrigger("isFollow");
-                    AttackNPC();
-                }
-                else
-                {
-                    GetComponent<Animator>().SetTrigger("isFollow");
-                    GetComponent<Animator>().ResetTrigger("isAtk");
+                    enemy.GetComponent<Enemy>().Damage(dmg);
+                    alreadyAttacked = true;
+                    Invoke(nameof(ResetAttack), 2.0f);
                 }
             }
             else
             {
-                dest = player.position;
-                agent.destination = dest;
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    GetComponent<Animator>().SetTrigger("isIdle");
-                    GetComponent<Animator>().ResetTrigger("isFollow");
-                    GetComponent<Animator>().ResetTrigger("isAtk");
-                }
-                else
-                {
-                    GetComponent<Animator>().SetTrigger("isFollow");
-                    GetComponent<Animator>().ResetTrigger("isIdle");
-                    GetComponent<Animator>().ResetTrigger("isAtk");
-                }
+                nextState = "Chase";
+                isAtk = false;
             }
+
+            if (!enemyInSightRange)
+            {
+                nextState = "Follow";
+                isAtk = false;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        SwitchState();
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+    }
+
+    void OnComp()
+    {
+        Vector3 distanceToPlayer = player.position - transform.position;
+        if (distanceToPlayer.magnitude <= pickUpRange)
+        {
+            isReady = true;
+            GetComponent<Animator>().SetTrigger("isReady");
         }
     }
 
@@ -84,31 +186,41 @@ public class Companion : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// When player wants the companion to follow them
-    /// </summary>
-    void OnComp()
+    private void Woof(float sec)
     {
-        Vector3 distanceToPlayer = player.position - transform.position;
-        if (distanceToPlayer.magnitude <= pickUpRange)
+        timerVal += Time.deltaTime;
+        if (timerVal > sec)
         {
-            isReady = true;
-            GetComponent<Animator>().SetTrigger("isReady");
+            woof.Play();
+            timerVal -= sec;
+        }
+    }
+    private void Growl(float sec)
+    {
+        timerVal1 += Time.deltaTime;
+        if (timerVal1 > sec)
+        {
+            growl.Play();
+            timerVal1 -= sec;
         }
     }
 
-    private void AttackNPC()
+    private void Update()
     {
-        if (!alreadyAttacked)
-        {
-            enemy.GetComponent<Enemy>().Damage(dmg);
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), 2.0f);
-        }
-    }
+        enemyInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsEnemy);
 
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
+        if (enemyInSightRange)
+        {
+            Growl(7);
+        }
+        else
+        {
+            Woof(8);
+        }
+
+        if (nextState != currentState)
+        {
+            currentState = nextState;
+        }
     }
 }

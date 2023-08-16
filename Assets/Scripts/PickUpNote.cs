@@ -8,11 +8,18 @@ public class PickUpNote : MonoBehaviour
     public float pickUpRange;
     //public GameObject pickUp;
     public GameObject note;
+    private bool isNote = false;
     NewBehaviourScript script;
+    public int noteNum;
 
     void Awake()
     {
         //pickUp.SetActive(false);
+    }
+
+    void Start()
+    {
+        script = FindObjectOfType<NewBehaviourScript>();
     }
 
     void OnTriggerEnter(Collider col)
@@ -37,17 +44,43 @@ public class PickUpNote : MonoBehaviour
   
     void OnPickUp()
     {
-        player = FindObjectOfType<NewBehaviourScript>().transform;
-        Vector3 distanceToPlayer = player.position - transform.position;
-        if (distanceToPlayer.magnitude <= pickUpRange)
+        if (isNote == true)
         {
-            note.SetActive(true);
-            Debug.Log("Gay");
+            note.SetActive(false);
+            isNote = false;
+        }
+        else
+        {
+            player = FindObjectOfType<NewBehaviourScript>().transform;
+            Vector3 distanceToPlayer = player.position - transform.position;
+            if (distanceToPlayer.magnitude <= pickUpRange)
+            {
+                note.SetActive(true);
+                isNote = true;
+            }
         }
     }
     void Update()
     {
-        script = FindObjectOfType<NewBehaviourScript>();
-        note = script.noteOne;
+        if (noteNum == 1)
+        {
+            note = script.noteOne;
+        }
+        else if (noteNum == 2)
+        {
+            note = script.noteTwo;
+        }
+        else if (noteNum == 4)
+        {
+            note = script.noteFour;
+        }
+        else if (noteNum == 5)
+        {
+            note = script.noteFive;
+        }
+        else if (noteNum == 6)
+        {
+            note = script.noteSix;
+        }
     }
 }
