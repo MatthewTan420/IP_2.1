@@ -4,11 +4,16 @@
  * Description: 
  */
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Crawler : MonoBehaviour
 {
+    private string currentState;
+    private string nextState;
+
     public NavMeshAgent agent;
     public Transform player;
     private Transform Companion;
@@ -33,87 +38,191 @@ public class Crawler : MonoBehaviour
     public AudioSource atk;
     public AudioSource hit;
 
-    private void Awake()
+
+    private void SwitchState()
     {
-        agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(currentState);
     }
 
-    private void Update()
+    IEnumerator Idle()
     {
-        player = FindObjectOfType<NewBehaviourScript>().transform;
-        if (isDead == false)
+        if (!isDead)
         {
-            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            while (currentState == "Idle")
+            {
+                if (!walkPointSet)
+                {
+                    Invoke(nameof(SearchWalkPoint), 3.0f);
+                }
 
-            NPCInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsNPC);
-            NPCInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsNPC);
+                if (walkPointSet)
+                {
+                    agent.SetDestination(walkPoint);
+                    agent.speed = 2.0f;
+                }
 
-            if ((!playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
-            {
-                Patrolling();
+                Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+                if (distanceToWalkPoint.magnitude < 1f)
+                {
+                    walkPointSet = false;
+                }
+
+
+                if ((playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Chase";
+                }
+                else if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "ChaseN";
+                }
+                else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "ChaseN";
+                }
+                else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "ChaseN";
+                }
+                yield return new WaitForEndOfFrame();
             }
-            else if ((playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
-            {
-                ChasePlayer();
-            }
-            else if ((playerInSightRange && playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
-            {
-                AttackPlayer();
-            }
-            else if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
-            {
-                ChaseNPC();
-            }
-            else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
-            {
-                ChaseNPC();
-            }
-            else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
-            {
-                ChaseNPC();
-            }
-            else if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
-            {
-                AttackNPC();
-            }
-            else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
-            {
-                AttackNPC();
-            }
-            else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
-            {
-                AttackNPC();
-            }
-        }
-        else
-        {
-            Invoke(nameof(DestroyEnemy), 2.0f);
-            return;
+            SwitchState();
         }
     }
 
-    /// <summary>
-    /// Enemy are just walking and standing still
-    /// </summary>
-    private void Patrolling()
+    IEnumerator Chase()
     {
-        if (!walkPointSet)
+        if (!isDead)
         {
-            Invoke(nameof(SearchWalkPoint), 3.0f);
+            agent.speed = 3.5f;
+
+            bool isChasing = true;
+
+            while (isChasing)
+            {
+                agent.SetDestination(player.position);
+
+                // some example of how the switching will work 
+                if ((!playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Idle";
+                    isChasing = false;
+                }
+                else if ((playerInSightRange && playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Atk";
+                    isChasing = false;
+                }
+                else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "ChaseN";
+                    isChasing = false;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+            SwitchState();
         }
+    }
 
-        if (walkPointSet)
+    IEnumerator Atk()
+    {
+        if (!isDead)
         {
-            agent.SetDestination(walkPoint);
-            agent.speed = 1.0f;
+            transform.LookAt(player);
+
+            bool isAtk = true;
+
+            while (isAtk)
+            {
+                agent.SetDestination(transform.position);
+                if (!alreadyAttacked)
+                {
+                    player.GetComponent<NewBehaviourScript>().Damage(dmg);
+                    alreadyAttacked = true;
+                    atk.Play();
+                    Invoke(nameof(ResetAttack), timeBetweenAttacks);
+                }
+
+                if ((playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Chase";
+                    isAtk = false;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            SwitchState();
         }
+    }
 
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        if (distanceToWalkPoint.magnitude < 1f)
+    IEnumerator ChaseN()
+    {
+        if (!isDead)
         {
-            walkPointSet = false;
+            agent.speed = 3.5f;
+
+            bool isChasing = true;
+
+            while (isChasing)
+            {
+                Companion = FindObjectOfType<Companion>().transform;
+                agent.SetDestination(Companion.position);
+
+                // some example of how the switching will work 
+                if ((!playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
+                {
+                    nextState = "AtkN";
+                    isChasing = false;
+                }
+                else if ((playerInSightRange && !playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
+                {
+                    nextState = "AtkN";
+                    isChasing = false;
+                }
+                else if ((playerInSightRange && playerInAttackRange) && (NPCInSightRange && NPCInAttackRange))
+                {
+                    nextState = "AtkN";
+                    isChasing = false;
+                }
+                else if ((!playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Idle";
+                    isChasing = false;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+            SwitchState();
+        }
+    }
+
+    IEnumerator AtkN()
+    {
+        if (!isDead)
+        {
+            transform.LookAt(Companion);
+
+            bool isAtk = true;
+
+            while (isAtk)
+            {
+                agent.SetDestination(transform.position);
+                if (!alreadyAttacked)
+                {
+                    alreadyAttacked = true;
+                    atk.Play();
+                    Invoke(nameof(ResetAttack), timeBetweenAttacks);
+                }
+
+                if ((!playerInSightRange && !playerInAttackRange) && (!NPCInSightRange && !NPCInAttackRange))
+                {
+                    nextState = "Idle";
+                    isAtk = false;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            SwitchState();
         }
     }
 
@@ -130,57 +239,6 @@ public class Crawler : MonoBehaviour
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
-        }
-    }
-
-    /// <summary>
-    /// Move towards player if player come too close
-    /// </summary>
-    private void ChasePlayer()
-    {
-        agent.SetDestination(player.position);
-        agent.speed = 3f;
-    }
-
-    /// <summary>
-    /// Attacks player if player is within range
-    /// </summary>
-    private void AttackPlayer()
-    {
-        agent.SetDestination(transform.position);
-
-        transform.LookAt(player);
-
-        if (!alreadyAttacked)
-        {
-            player.GetComponent<NewBehaviourScript>().Damage(dmg);
-            alreadyAttacked = true;
-            atk.Play();
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-
-    private void ChaseNPC()
-    {
-        Companion = FindObjectOfType<Companion>().transform;
-        agent.SetDestination(Companion.position);
-        agent.speed = 3.5f;
-    }
-
-    /// <summary>
-    /// Attacks NPC if NPC is within range
-    /// </summary>
-    private void AttackNPC()
-    {
-        agent.SetDestination(transform.position);
-
-        transform.LookAt(Companion);
-
-        if (!alreadyAttacked)
-        {
-            alreadyAttacked = true;
-            atk.Play();
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
 
@@ -216,11 +274,36 @@ public class Crawler : MonoBehaviour
         {
             Companion.GetComponent<Companion>().agent.speed = 3.0f;
         }
+        Invoke(nameof(DestroyEnemy), 3.0f);
+        return;
     }
 
     private void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        currentState = "Idle";
+        nextState = currentState;
+        SwitchState();
+    }
+
+    private void Update()
+    {
+        player = FindObjectOfType<NewBehaviourScript>().transform;
+
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        NPCInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsNPC);
+        NPCInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsNPC);
+
+        if (nextState != currentState)
+        {
+            currentState = nextState;
+        }
     }
 
     private void OnDrawGizmosSelected()
