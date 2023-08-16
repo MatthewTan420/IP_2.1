@@ -136,7 +136,16 @@ public class Companion : MonoBehaviour
 
         while (isAtk)
         {
-            enemy = FindObjectOfType<Enemy>().transform;
+            Enemy isScript = FindObjectOfType<Enemy>();
+            if (isScript != null)
+            {
+                enemy = isScript.transform;
+            }
+            else
+            {
+                nextState = "Follow";
+                isAtk = false;
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
