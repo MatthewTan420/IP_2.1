@@ -15,6 +15,6 @@ public class WinTest : MonoBehaviour
 
     void LoadMenu()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(0);
     }
 }
