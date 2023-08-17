@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject UI;
     public GameObject Menu;
     public GameObject DeathMenu;
+    public GameObject Victory;
     public bool isMenu = false;
     public InventoryManager invenScript;
     public GameObject noteOne;
@@ -62,6 +64,12 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject noteFour;
     public GameObject noteFive;
     public GameObject noteSix;
+
+    public Image fadeImg;
+    private Color fadeColor = new Color();
+    private float fadeDur = 3.0f;
+    private float fadeTimer = 0.0f;
+    public bool isWin = false;
 
     public bool isStuck = false;
     public static bool isTeleport = false;
@@ -148,6 +156,7 @@ public class NewBehaviourScript : MonoBehaviour
             Menu.SetActive(true);
             isLock = false;
             isTeleport = false;
+            isWin = false;
         }
         else if (collision.gameObject.tag == "Untagged")
         {
@@ -165,6 +174,10 @@ public class NewBehaviourScript : MonoBehaviour
         {
             isStuck = true;
         }
+        else if (col.gameObject.tag == "Victory")
+        {
+            isWin = true;
+        }
     }
 
     void OnTriggerExit(Collider col)
@@ -172,10 +185,6 @@ public class NewBehaviourScript : MonoBehaviour
         if (col.gameObject.tag == "Crawler")
         {
             isStuck = false;
-        }
-        else if (col.gameObject.tag == "Quest")
-        {
-            Destroy(col.gameObject);
         }
     }
 
@@ -201,17 +210,20 @@ public class NewBehaviourScript : MonoBehaviour
     /// </summary>
     public void Damage(float dmg)
     {
+        if (isWin == false)
+        {
+            if (curHealth > 0)
+            {
+                curHealth -= dmg;
+                healthbar.SetHealth(curHealth);
+            }
+            else if (curHealth <= 0)
+            {
+                isDead = true;
+                GetComponent<Animator>().SetTrigger("isDie");
+            }
+        }
         
-        if (curHealth > 0)
-        {
-            curHealth -= dmg;
-            healthbar.SetHealth(curHealth);
-        }
-        else if (curHealth <= 0)
-        {
-            isDead = true;
-            GetComponent<Animator>().SetTrigger("isDie");
-        }
     }
 
     /// <summary>
@@ -246,6 +258,7 @@ public class NewBehaviourScript : MonoBehaviour
         healthbar.SetHealth(curHealth);
         DeathMenu.SetActive(false);
         UI.SetActive(true);
+        Victory.SetActive(false);
         isLock = true;
         isDead = false;
         isStuck = false;
@@ -284,6 +297,23 @@ public class NewBehaviourScript : MonoBehaviour
             DeathMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             return;
+        }
+
+        if (isWin == true)
+        {
+            Victory.SetActive(true);
+            curSpeed = 0.0f;
+            curSprint = 0.0f;
+
+            fadeTimer += Time.deltaTime;
+            fadeColor.a = fadeTimer / fadeDur;
+            fadeImg.color = fadeColor;
+        }
+        else
+        {
+            Victory.SetActive(false);
+            fadeColor.a = 0.0f;
+            fadeImg.color = fadeColor;
         }
 
         if (isLock == true)
