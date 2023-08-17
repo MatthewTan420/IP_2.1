@@ -10,6 +10,7 @@ public class DialogueText : MonoBehaviour
     public GameObject dialCon;
     public TextMeshProUGUI dialText;
     public string whatToSay;
+    public bool isQuest = true;
 
     // Start is called before the first frame update
     void Start()
@@ -21,20 +22,22 @@ public class DialogueText : MonoBehaviour
         dialCon.SetActive(false);
     }
 
+    /// <summary>
+    /// This opens the quest/dialogue tag
+    /// </summary>
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && isQuest)
         {
             dialCon.SetActive(true);
             dialText.text = whatToSay;
+            Invoke(nameof(Inactive), 5.0f);
+            isQuest = false;
         }
     }
 
-    void OnTriggerExit(Collider col)
+    void Inactive()
     {
-        if (col.gameObject.tag == "Player")
-        {
-            dialCon.SetActive(false);
-        }
+        dialCon.SetActive(false);
     }
 }

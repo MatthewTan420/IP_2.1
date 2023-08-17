@@ -25,5 +25,10 @@ public class SwitchScene : MonoBehaviour
         // use the SceneManager to load the specified scene index.
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
+
+    public void quitGame()
+    {
+        Application.Quit();
+    }
+
 }
