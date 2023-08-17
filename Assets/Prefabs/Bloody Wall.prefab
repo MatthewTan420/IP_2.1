@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5858639584041939263}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.99, y: 0.49, z: -3.04}
+  m_LocalPosition: {x: -36.92, y: 0, z: -29.765842}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 7745549208115010792}
   - component: {fileID: 6300875889210124510}
   - component: {fileID: 8475822783074537610}
+  - component: {fileID: 5498638406394607594}
   m_Layer: 0
   m_Name: Straight_Wall28
   m_TagString: Untagged
@@ -72,7 +73,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7590089294780480090}
-  m_Mesh: {fileID: 1343105678621807236, guid: e8eb1c05612649a438c2d792d1260601, type: 3}
+  m_Mesh: {fileID: 1343105678621807236, guid: ab87ae1932b366349947a220a1bef5fc, type: 3}
 --- !u!23 &8475822783074537610
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -81,7 +82,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7590089294780480090}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -93,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 09165f7549ef72841a31197de4867a7f, type: 2}
+  - {fileID: 2100000, guid: fabe4fd9b02e8384ca1f5bc7923f1e04, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,3 +116,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5498638406394607594
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7590089294780480090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1343105678621807236, guid: ab87ae1932b366349947a220a1bef5fc, type: 3}
