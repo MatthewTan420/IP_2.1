@@ -256,6 +256,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         healthbar.SetMaxHealth(Health);
         healthbar.SetHealth(curHealth);
+        Menu.SetActive(false);
         DeathMenu.SetActive(false);
         UI.SetActive(true);
         Victory.SetActive(false);

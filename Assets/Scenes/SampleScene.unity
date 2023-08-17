@@ -5533,52 +5533,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7905844072068590408, guid: 1eff742348051304aac7f1cac72bddb6, type: 3}
---- !u!1 &149817000
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 149817002}
-  - component: {fileID: 149817001}
-  m_Layer: 6
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &149817001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149817000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fb861b16e4c4cf4bb31d87b688f5e7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8071899077241845240, guid: 3c52c83bdb9ca9a4689dac7beda24a99,
-    type: 3}
---- !u!4 &149817002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149817000}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.204, y: 1.2806323, z: -2.67}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &151458150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22156,6 +22110,7 @@ MonoBehaviour:
   dialCon: {fileID: 0}
   dialText: {fileID: 0}
   whatToSay: Where am I?
+  isQuest: 1
 --- !u!65 &724527927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25485,6 +25440,50 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3633865748600368068, guid: 2d171eb2a34015641ab62a72e0f18ea0, type: 3}
+--- !u!1 &821901987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 821901989}
+  - component: {fileID: 821901988}
+  m_Layer: 6
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &821901988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821901987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391df1a9059be2443a41a6a7481f3825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &821901989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821901987}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.204, y: 1.2806323, z: -2.67}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &826283158
 GameObject:
   m_ObjectHideFlags: 0
@@ -28568,6 +28567,7 @@ MonoBehaviour:
   dialCon: {fileID: 0}
   dialText: {fileID: 0}
   whatToSay: I need to find something to defind myself
+  isQuest: 1
 --- !u!65 &920703049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28843,6 +28843,7 @@ MonoBehaviour:
   dialCon: {fileID: 0}
   dialText: {fileID: 0}
   whatToSay: What is that cancerous noise?
+  isQuest: 1
 --- !u!65 &929313364
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34170,7 +34171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1918de3622e11504c85a179fc6e8dfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 1
+  sceneToLoad: 2
 --- !u!1001 &1103611829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70934,7 +70935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: 41f7642e965d49147b16322eeb36c336, type: 2}
   player: {fileID: 0}
-  pickUpRange: 1
+  pickUpRange: 2
   pickUp: {fileID: 768455056}
 --- !u!114 &2842233607594790276
 MonoBehaviour:

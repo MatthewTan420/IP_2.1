@@ -1311,7 +1311,6 @@ Transform:
   - {fileID: 1839823858}
   - {fileID: 895906644}
   - {fileID: 191386806}
-  - {fileID: 1024737466}
   - {fileID: 639615260}
   - {fileID: 1027636768}
   - {fileID: 424010232}
@@ -1332,7 +1331,6 @@ Transform:
   - {fileID: 1469336056}
   - {fileID: 724796679}
   - {fileID: 1090974467}
-  - {fileID: 1696623462}
   - {fileID: 629881370}
   - {fileID: 1980995978}
   - {fileID: 628108890}
@@ -1354,7 +1352,6 @@ Transform:
   - {fileID: 1544798553}
   - {fileID: 1206696281}
   - {fileID: 205764341}
-  - {fileID: 1681968762}
   - {fileID: 109296888}
   - {fileID: 2016832065}
   - {fileID: 1981009691}
@@ -1394,6 +1391,9 @@ Transform:
   - {fileID: 2114166331}
   - {fileID: 1396313964}
   - {fileID: 1155659642}
+  - {fileID: 2120442024}
+  - {fileID: 553317073}
+  - {fileID: 1007865095}
   m_Father: {fileID: 0}
   m_RootOrder: 428
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8069,7 +8069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1918de3622e11504c85a179fc6e8dfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 2
+  sceneToLoad: 3
 --- !u!1001 &165211004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11041,6 +11041,7 @@ MonoBehaviour:
   dialCon: {fileID: 0}
   dialText: {fileID: 0}
   whatToSay: Dammit, exit is blocked. I have to find another way out
+  isQuest: 1
 --- !u!65 &218911316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16496,6 +16497,7 @@ MonoBehaviour:
   dialCon: {fileID: 0}
   dialText: {fileID: 0}
   whatToSay: That's a strange looking door
+  isQuest: 1
 --- !u!65 &316777550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25929,6 +25931,91 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -629719859055844128, guid: 3607ce31b0242174da3411ab8aa653fa, type: 3}
+--- !u!1001 &553317072
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 30822967}
+    m_Modifications:
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 86
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5215002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5215002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.356788
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7066412
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70757204
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 269.925
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667166259522529697, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_Name
+      value: toilet bowl (21)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c59e6734af1ea846855de3bd3906aad, type: 3}
+--- !u!4 &553317073 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+    type: 3}
+  m_PrefabInstance: {fileID: 553317072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &554725749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46822,6 +46909,91 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 971de09871216f843aac5562415732c3, type: 3}
+--- !u!1001 &1007865094
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 30822967}
+    m_Modifications:
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 86
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5215002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5215002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.56352
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7066412
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70757204
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 269.925
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667166259522529697, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_Name
+      value: toilet bowl (22)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c59e6734af1ea846855de3bd3906aad, type: 3}
+--- !u!4 &1007865095 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+    type: 3}
+  m_PrefabInstance: {fileID: 1007865094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1008581152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47651,91 +47823,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 22493791576760e43bed66d2989ece77, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80c0bc9d3defbc4ab7ec515106095e6, type: 3}
---- !u!1001 &1024737465
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 30822967}
-    m_Modifications:
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5215002
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5215002
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 7.361283
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7066412
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.70757204
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 269.925
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667166259522529697, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_Name
-      value: toilet bowl (12)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1c59e6734af1ea846855de3bd3906aad, type: 3}
---- !u!4 &1024737466 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-    type: 3}
-  m_PrefabInstance: {fileID: 1024737465}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1024882732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64770,7 +64857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1430477732
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -64970,7 +65057,7 @@ GameObject:
   - component: {fileID: 1436944878}
   - component: {fileID: 1436944877}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74141,91 +74228,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3633865748600368068, guid: 2d171eb2a34015641ab62a72e0f18ea0, type: 3}
---- !u!1001 &1681968761
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 30822967}
-    m_Modifications:
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 47
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5215002
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5215002
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 13.563519
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7066412
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.70757204
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 269.925
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667166259522529697, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_Name
-      value: toilet bowl (17)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1c59e6734af1ea846855de3bd3906aad, type: 3}
---- !u!4 &1681968762 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-    type: 3}
-  m_PrefabInstance: {fileID: 1681968761}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1681982674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74809,91 +74811,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 971de09871216f843aac5562415732c3, type: 3}
---- !u!1001 &1696623461
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 30822967}
-    m_Modifications:
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5215002
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5215002
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 15.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 7.356789
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7066412
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.70757204
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 269.925
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667166259522529697, guid: 1c59e6734af1ea846855de3bd3906aad,
-        type: 3}
-      propertyPath: m_Name
-      value: toilet bowl (10)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1c59e6734af1ea846855de3bd3906aad, type: 3}
---- !u!4 &1696623462 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
-    type: 3}
-  m_PrefabInstance: {fileID: 1696623461}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1697321853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78837,6 +78754,7 @@ MonoBehaviour:
   dialCon: {fileID: 0}
   dialText: {fileID: 0}
   whatToSay: What is going on here, why are there zombies?
+  isQuest: 1
 --- !u!65 &1790182836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -87016,6 +86934,7 @@ MonoBehaviour:
   dialCon: {fileID: 0}
   dialText: {fileID: 0}
   whatToSay: Sweet, something powerful
+  isQuest: 1
 --- !u!65 &1985462637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92243,6 +92162,91 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f2d6247a8b59824a896dc9c82fa3c1d, type: 3}
+--- !u!1001 &2120442023
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 30822967}
+    m_Modifications:
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 86
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5215002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5215002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.356788
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7066412
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70757204
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 269.925
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667166259522529697, guid: 1c59e6734af1ea846855de3bd3906aad,
+        type: 3}
+      propertyPath: m_Name
+      value: toilet bowl (20)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c59e6734af1ea846855de3bd3906aad, type: 3}
+--- !u!4 &2120442024 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7002235110011646747, guid: 1c59e6734af1ea846855de3bd3906aad,
+    type: 3}
+  m_PrefabInstance: {fileID: 2120442023}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2123474826
 PrefabInstance:
   m_ObjectHideFlags: 0
