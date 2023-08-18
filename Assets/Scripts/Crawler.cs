@@ -130,7 +130,6 @@ public class Crawler : MonoBehaviour
     {
         if (!isDead)
         {
-            GetComponent<Animator>().SetTrigger("isAtk"); 
             transform.LookAt(player);
 
             bool isAtk = true;

@@ -153,7 +153,9 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Menu")
         {
+            curHealth = Health;
             Menu.SetActive(true);
+            DeathMenu.SetActive(false);
             isLock = false;
             isTeleport = false;
             isWin = false;

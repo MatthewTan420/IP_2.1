@@ -24,9 +24,11 @@ public class Companion : MonoBehaviour
     public LayerMask whatIsGround, whatIsEnemy;
     public int dmg;
     bool alreadyAttacked;
+    public bool isStuck = false;
 
     public AudioSource woof;
     public AudioSource growl;
+    public AudioSource whine;
     float timerVal = 0;
     float timerVal1 = 6;
 
@@ -192,6 +194,8 @@ public class Companion : MonoBehaviour
         if (col.gameObject.tag == "Crawler")
         {
             agent.speed = 0.0f;
+            isStuck = true;
+            whine.Play();
         }
     }
 
@@ -217,6 +221,11 @@ public class Companion : MonoBehaviour
     private void Update()
     {
         enemyInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsEnemy);
+
+        if (!isStuck)
+        {
+            whine.Stop();
+        }
 
         if (enemyInSightRange)
         {
