@@ -1,7 +1,7 @@
 /*
- * Author: 
- * Date: 
- * Description: 
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: Door Function
  */
 
 using System.Collections;
@@ -25,6 +25,9 @@ public class Door : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This closes the door if user leaves
+    /// </summary>
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")

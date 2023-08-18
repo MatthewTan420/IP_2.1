@@ -1,7 +1,7 @@
 /*
- * Author: 
- * Date: 
- * Description: 
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: HP_Bar
  */
 
 using System.Collections;

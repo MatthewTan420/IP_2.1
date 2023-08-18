@@ -1,7 +1,7 @@
 /*
- * Author: 
- * Date: 
- * Description: 
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: NPC Script
  */
 
 using System.Collections;
@@ -34,6 +34,9 @@ public class NPC : MonoBehaviour
         StartCoroutine(currentState);
     }
 
+    /// <summary>
+    /// Idle State
+    /// </summary>
     IEnumerator Idle()
     {
         bool isIdle = true;
@@ -53,6 +56,9 @@ public class NPC : MonoBehaviour
         SwitchState();
     }
 
+    /// <summary>
+    /// Run from Zombie State
+    /// </summary>
     IEnumerator Chase()
     {
         GetComponent<Animator>().SetTrigger("isRun");
@@ -63,10 +69,18 @@ public class NPC : MonoBehaviour
 
         while (isChasing)
         {
-            enemy = FindObjectOfType<Enemy>().transform;
+            Enemy isScript = FindObjectOfType<Enemy>();
+            if (isScript != null)
+            {
+                enemy = isScript.transform;
+            }
+            else
+            {
+                nextState = "Idle";
+                isChasing = false;
+            }
 
             Vector3 normDir = (enemy.position - transform.position).normalized;
-            //normDir = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * normDir;
             MoveToPos(transform.position - (normDir * displacementDist));
 
             // some example of how the switching will work 
@@ -96,6 +110,9 @@ public class NPC : MonoBehaviour
             currentState = nextState;
         }
 
+        /// <summary>
+        /// NPC Dies if zombie attacks NPC
+        /// </summary>
         if (isDead == true)
         {
             Invoke(nameof(DestroyEnemy), 5.0f);
@@ -111,6 +128,9 @@ public class NPC : MonoBehaviour
         agent.SetDestination(pos);
     }
 
+    /// <summary>
+    /// NPC Dies
+    /// </summary>
     public void Die()
     {
         isDead = true;

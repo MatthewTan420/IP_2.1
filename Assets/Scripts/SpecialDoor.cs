@@ -1,3 +1,9 @@
+/*
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: SpecialDoor
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +33,6 @@ public class SpecialDoor : MonoBehaviour
     {
         NewItems2 = InventoryManager.NewItems2;
         Items2 = InventoryManager.Items2;
-        //player = FindObjectOfType<NewBehaviourScript>().transform;
         pickUp.SetActive(false);
         pickUp1.SetActive(false);
     }
@@ -46,11 +51,15 @@ public class SpecialDoor : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Pick up function
+    /// </summary>
     void OnInteract()
     {
         Vector3 distanceToPlayer = player.position - transform.position;
         if (distanceToPlayer.magnitude <= pickUpRange)
         {
+            //unlocks the door if user has key
             if (Items.Contains(Item))
             {
                 Items.Remove(Item);
@@ -72,8 +81,12 @@ public class SpecialDoor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This opens the door if user is near
+    /// </summary>
     void OnTriggerEnter(Collider other)
     {
+        // if door is unlocked
         if (other.gameObject.tag == "Player" && isLock == false)
         {
             GetComponent<Animator>().SetTrigger("Enter");
@@ -93,6 +106,9 @@ public class SpecialDoor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This closes the door if user leaves
+    /// </summary>
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player" && isLock == false)

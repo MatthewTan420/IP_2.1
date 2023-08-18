@@ -1,3 +1,9 @@
+/*
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: DialogueText
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,7 +1,7 @@
 /*
- * Author: 
- * Date: 
- * Description: 
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: Companion Script
  */
 
 using System.Collections;
@@ -127,11 +127,6 @@ public class Companion : MonoBehaviour
                 nextState = "Atk";
                 isChase = false;
             }
-
-            if (enemy.transform == null)
-            {
-                Debug.Log("e");
-            }
             yield return new WaitForEndOfFrame();
         }
         SwitchState();
@@ -159,7 +154,7 @@ public class Companion : MonoBehaviour
                 nextState = "Follow";
                 isAtk = false;
             }
-
+            //attack zombie if dog is close enough
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 if (!alreadyAttacked)

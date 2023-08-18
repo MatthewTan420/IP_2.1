@@ -1,3 +1,9 @@
+/*
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: Jumpscare
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +14,9 @@ public class Jumpscare : MonoBehaviour
     public GameObject zombie;
     public AudioSource scare;
 
+    /// <summary>
+    /// This activates jumpscare
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -18,6 +27,9 @@ public class Jumpscare : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This destroys jumpscare
+    /// </summary>
     private void DestroyJump()
     {
         Destroy(jumpscare);
