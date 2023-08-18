@@ -113,6 +113,9 @@ public class NewBehaviourScript : MonoBehaviour
         sprint = false;
     }
 
+    /// <summary>
+    /// Chase Player State
+    /// </summary>
     void OnHeal(InputValue value)
     {
         if (Items.Contains(Item))
@@ -137,6 +140,9 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Open Inventory
+    /// </summary>
     void OnInven(InputValue value)
     {
         if (isDead != true)
@@ -149,6 +155,9 @@ public class NewBehaviourScript : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// When user collides with object
+    /// </summary>
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Menu")
@@ -159,6 +168,8 @@ public class NewBehaviourScript : MonoBehaviour
             isLock = false;
             isTeleport = false;
             isWin = false;
+            isMenu = true;
+            isLight = false;
         }
         else if (collision.gameObject.tag == "Untagged")
         {
@@ -166,6 +177,9 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When user collides with a trigger
+    /// </summary>
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Teleport")
@@ -182,6 +196,9 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When user exits a trigger
+    /// </summary>
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Crawler")
@@ -200,6 +217,9 @@ public class NewBehaviourScript : MonoBehaviour
         isLock = false;
     }
 
+    /// <summary>
+    /// For the respawn menu
+    /// </summary>
     public void ReloadScene()
     {
         // use the SceneManager to load the specified scene index.
@@ -222,7 +242,6 @@ public class NewBehaviourScript : MonoBehaviour
             else if (curHealth <= 0)
             {
                 isDead = true;
-                GetComponent<Animator>().SetTrigger("isDie");
             }
         }
         
@@ -242,7 +261,7 @@ public class NewBehaviourScript : MonoBehaviour
     /// <summary>
     /// Start is called before the first frame update
     /// </summary>
-    void Start()
+    public void Start()
     {
         curSpeed = movementSpeed;
         curSprint = sprintSpeed;
@@ -265,6 +284,7 @@ public class NewBehaviourScript : MonoBehaviour
         isLock = true;
         isDead = false;
         isStuck = false;
+        isMenu = false;
     }
 
     /// <summary>
@@ -272,6 +292,7 @@ public class NewBehaviourScript : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //player user is near a crawler
         if (isStuck == true)
         {
             curSpeed = 0.0f;
@@ -282,7 +303,7 @@ public class NewBehaviourScript : MonoBehaviour
             curSpeed = movementSpeed;
             curSprint = sprintSpeed;
         }
-
+        //torchlight from pick up phone
         if (isLight == true)
         {
             light.SetActive(true);
@@ -291,17 +312,18 @@ public class NewBehaviourScript : MonoBehaviour
         {
             light.SetActive(false);
         }
-
+        //for inventory system
         Items = InventoryManager.Instance.Items;
         NewItems = InventoryManager.Instance.NewItems;
 
         if (curHealth <= 0)
         {
             DeathMenu.SetActive(true);
+            GetComponent<Animator>().SetTrigger("isDie");
             Cursor.lockState = CursorLockMode.None;
             return;
         }
-
+        //when user reach the end point
         if (isWin == true)
         {
             Victory.SetActive(true);
@@ -318,7 +340,7 @@ public class NewBehaviourScript : MonoBehaviour
             fadeColor.a = 0.0f;
             fadeImg.color = fadeColor;
         }
-
+        //if user pauses/resume the game
         if (isLock == true)
         {
             Cursor.lockState = CursorLockMode.Locked;

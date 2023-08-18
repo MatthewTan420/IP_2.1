@@ -1,3 +1,9 @@
+/*
+ * Author: 
+ * Date: 
+ * Description: 
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +20,10 @@ public class InActive : MonoBehaviour
         player = FindObjectOfType<NewBehaviourScript>().transform;
     }
 
-    void OnPickUp()
+    /// <summary>
+    /// set up player in one of the levels
+    /// </summary>
+    void OnInteract()
     {
         Vector3 distanceToPlayer = player.position - transform.position;
         if (distanceToPlayer.magnitude <= pickUpRange)

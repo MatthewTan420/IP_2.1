@@ -39,6 +39,8 @@ public class PickUpGun : MonoBehaviour
         ammoCount.SetActive(false);
         fpsCam = FindObjectOfType<Camera>().transform;
         pickUp.SetActive(false);
+
+        //when user equips or unequips the gun
         if (!equipped)
         {
             gunScript.enabled = false;
@@ -60,8 +62,15 @@ public class PickUpGun : MonoBehaviour
         {
             pickUp.SetActive(false);
         }
-    }
 
+        if (script.isMenu == true)
+        {
+            Drop();
+        }
+    }
+    /// <summary>
+    /// turn on the UI canvas
+    /// </summary>
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
@@ -69,7 +78,9 @@ public class PickUpGun : MonoBehaviour
             pickUp.SetActive(true);
         }
     }
-
+    /// <summary>
+    /// turn off the UI canvas
+    /// </summary>
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Player")
@@ -79,7 +90,7 @@ public class PickUpGun : MonoBehaviour
     }
 
     /// <summary>
-    /// Pick up or drop the item
+    /// Pick up the item
     /// </summary>
     void OnInteract()
     {
@@ -92,8 +103,11 @@ public class PickUpGun : MonoBehaviour
                 PickUp();
             }
         }
-    } 
+    }
 
+    /// <summary>
+    /// Drop the item
+    /// </summary>
     void OnPickUp()
     {
         //Drop if equipped and "Q" is pressed
@@ -103,6 +117,9 @@ public class PickUpGun : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Equip or hide the weapon on their hand
+    /// </summary>
     void OnEquip()
     {
         if (equipped && Active == false)
@@ -119,6 +136,9 @@ public class PickUpGun : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Switch to other weapon
+    /// </summary>
     void OnEquip2()
     {
         if (equipped)

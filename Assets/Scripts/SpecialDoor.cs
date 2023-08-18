@@ -14,6 +14,7 @@ public class SpecialDoor : MonoBehaviour
     private Transform player;
     public float pickUpRange;
     public GameObject pickUp;
+    public GameObject pickUp1;
 
     public bool isLock = true;
 
@@ -28,6 +29,7 @@ public class SpecialDoor : MonoBehaviour
         Items2 = InventoryManager.Items2;
         //player = FindObjectOfType<NewBehaviourScript>().transform;
         pickUp.SetActive(false);
+        pickUp1.SetActive(false);
     }
 
     private void Update()
@@ -39,7 +41,9 @@ public class SpecialDoor : MonoBehaviour
         if (isLock == false)
         {
             pickUp.SetActive(false);
+            pickUp1.SetActive(false);
         }
+
     }
 
     void OnInteract()
@@ -78,7 +82,14 @@ public class SpecialDoor : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            pickUp.SetActive(true);
+            if (Items.Contains(Item))
+            {
+                pickUp.SetActive(true);
+            }
+            else
+            {
+                pickUp1.SetActive(true);
+            }
         }
     }
 
@@ -92,7 +103,14 @@ public class SpecialDoor : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            pickUp.SetActive(false);
+            if (Items.Contains(Item))
+            {
+                pickUp.SetActive(false);
+            }
+            else
+            {
+                pickUp1.SetActive(false);
+            }
         }
     }
 }
