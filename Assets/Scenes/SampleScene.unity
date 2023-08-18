@@ -28566,7 +28566,7 @@ MonoBehaviour:
   player: {fileID: 0}
   dialCon: {fileID: 0}
   dialText: {fileID: 0}
-  whatToSay: I need to find something to defind myself
+  whatToSay: I need to find something to defend myself
   isQuest: 1
 --- !u!65 &920703049
 BoxCollider:
