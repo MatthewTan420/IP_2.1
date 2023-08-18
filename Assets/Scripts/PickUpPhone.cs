@@ -18,7 +18,7 @@ public class PickUpPhone : MonoBehaviour
     /// <summary>
     /// Pick up function
     /// </summary>
-    void OnPickUp()
+    void OnInteract()
     {
         player = FindObjectOfType<NewBehaviourScript>().transform;
         Vector3 distanceToPlayer = player.position - transform.position;
