@@ -30,6 +30,9 @@ public class InventoryManager : MonoBehaviour
         isTeleport = NewBehaviourScript.isTeleport;
     }
 
+    /// <summary>
+    /// Updates list if switch scene
+    /// </summary>
     private void Update()
     {
         if(isTeleport == true)

@@ -111,6 +111,9 @@ public class Shoot : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// weapon loaded
+    /// </summary>
     void ReloadFinish()
     {
         bulletsLeft = magazineSize;

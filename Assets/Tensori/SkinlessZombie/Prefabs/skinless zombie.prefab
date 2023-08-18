@@ -72,7 +72,8 @@ AudioSource:
   m_GameObject: {fileID: 410569564400154392}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: d193a13efe20bda418ff776020bdfcf8,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a4366158371c9514cae30cfff454dcb2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -84,9 +85,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -119,7 +120,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1990,7 +1991,8 @@ AudioSource:
   m_GameObject: {fileID: 4065620314245855070}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: d193a13efe20bda418ff776020bdfcf8,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: fc1882cb9cb0d474c95537bbdb4c48bd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2002,9 +2004,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2037,7 +2039,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2483,7 +2485,8 @@ AudioSource:
   m_GameObject: {fileID: 5067635569762171245}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: d193a13efe20bda418ff776020bdfcf8,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 8b9826c915109c446be0c38d54721a2d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2495,9 +2498,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2530,7 +2533,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

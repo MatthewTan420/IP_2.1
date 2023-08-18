@@ -50,6 +50,9 @@ public class Companion : MonoBehaviour
         SwitchState();
     }
 
+    /// <summary>
+    /// Idle State
+    /// </summary>
     IEnumerator Idle()
     {
         GetComponent<Animator>().SetTrigger("isIdle");
@@ -69,6 +72,9 @@ public class Companion : MonoBehaviour
         SwitchState();
     }
 
+    /// <summary>
+    /// Follow State
+    /// </summary>
     IEnumerator Follow()
     {
         bool isFollow = true;
@@ -99,6 +105,9 @@ public class Companion : MonoBehaviour
         SwitchState();
     }
 
+    /// <summary>
+    /// Chase Zombie State
+    /// </summary>
     IEnumerator Chase()
     {
         GetComponent<Animator>().SetTrigger("isFollow");
@@ -127,7 +136,9 @@ public class Companion : MonoBehaviour
         }
         SwitchState();
     }
-
+    /// <summary>
+    /// Attack Zombie State
+    /// </summary>
     IEnumerator Atk()
     {
         GetComponent<Animator>().SetTrigger("isAtk");
@@ -179,6 +190,9 @@ public class Companion : MonoBehaviour
         alreadyAttacked = false;
     }
 
+    /// <summary>
+    /// To get the dog to follow player
+    /// </summary>
     void OnComp()
     {
         Vector3 distanceToPlayer = player.position - transform.position;
@@ -189,6 +203,9 @@ public class Companion : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Dog stops if crawler is near
+    /// </summary>
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Crawler")
@@ -199,6 +216,9 @@ public class Companion : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Audio
+    /// </summary>
     private void Woof(float sec)
     {
         timerVal += Time.deltaTime;
@@ -208,6 +228,10 @@ public class Companion : MonoBehaviour
             timerVal -= sec;
         }
     }
+
+    /// <summary>
+    /// Audio if near enemy
+    /// </summary>
     private void Growl(float sec)
     {
         timerVal1 += Time.deltaTime;

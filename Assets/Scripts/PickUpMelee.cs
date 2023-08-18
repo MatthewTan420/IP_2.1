@@ -77,7 +77,7 @@ public class PickUpMelee : MonoBehaviour
     }
 
     /// <summary>
-    /// Pick up or drop the item
+    /// Pick up the item
     /// </summary>
     void OnInteract()
     {
@@ -92,6 +92,9 @@ public class PickUpMelee : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Drop the item
+    /// </summary>
     void OnPickUp()
     {
         //Drop if equipped and "Q" is pressed
@@ -101,6 +104,9 @@ public class PickUpMelee : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Equip or hide the weapon on their hand
+    /// </summary>
     void OnEquip()
     {
         if (equipped)
