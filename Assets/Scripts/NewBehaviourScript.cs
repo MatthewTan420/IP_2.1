@@ -99,7 +99,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (isStuck == false && PlayerGrounded == true)
         {
-            rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 4, 0), ForceMode.Impulse);
             PlayerGrounded = false;
         }
     }
