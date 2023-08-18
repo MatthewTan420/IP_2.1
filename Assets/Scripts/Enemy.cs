@@ -1,7 +1,7 @@
 /*
- * Author: 
- * Date: 
- * Description: 
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: Enemy Script
  */
 
 using System.Collections;
@@ -46,6 +46,9 @@ public class Enemy : MonoBehaviour
         StartCoroutine(currentState);
     }
 
+    /// <summary>
+    /// Idle State
+    /// </summary>
     IEnumerator Idle()
     {
         if (!isDead)
@@ -102,6 +105,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Chase Player State
+    /// </summary>
     IEnumerator Chase()
     {
         if (!isDead)
@@ -141,6 +147,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Atk Player State
+    /// </summary>
     IEnumerator Atk()
     {
         if (!isDead)
@@ -175,6 +184,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Chase NPC State
+    /// </summary>
     IEnumerator ChaseN()
     {
         if (!isDead)
@@ -221,6 +233,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Atk NPC State
+    /// </summary>
     IEnumerator AtkN()
     {
         if (!isDead)
@@ -232,6 +247,17 @@ public class Enemy : MonoBehaviour
 
             while (isAtk)
             {
+                NPC isScript = FindObjectOfType<NPC>();
+                if (isScript != null)
+                {
+                    NPC = isScript.transform;
+                }
+                else
+                {
+                    nextState = "Idle";
+                    isAtk = false;
+                }
+
                 agent.SetDestination(transform.position);
                 if (!alreadyAttacked)
                 {

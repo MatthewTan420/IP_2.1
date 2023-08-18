@@ -1,3 +1,9 @@
+/*
+ * Author: Matthew, Seth, Wee Kiat, Isabel
+ * Date: 19/8/2023
+ * Description: LightFlicker
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +22,9 @@ public class LightFlicker : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Flickers the light
+    /// </summary>
     IEnumerator FlickeringLight()
     {
         isFlickering = true;
