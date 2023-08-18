@@ -79,14 +79,9 @@ public class PickUpMelee : MonoBehaviour
     /// <summary>
     /// Pick up or drop the item
     /// </summary>
-    void OnPickUp()
+    void OnInteract()
     {
-        //Drop if equipped and "Q" is pressed
-        if (equipped == true && Active == true)
-        {
-            Drop();
-        }
-        else
+        if (equipped == false)
         {
             //Check if player is in range and "E" is pressed
             Vector3 distanceToPlayer = player.position - transform.position;
@@ -94,6 +89,15 @@ public class PickUpMelee : MonoBehaviour
             {
                 PickUp();
             }
+        }
+    }
+
+    void OnPickUp()
+    {
+        //Drop if equipped and "Q" is pressed
+        if (equipped == true && Active == true)
+        {
+            Drop();
         }
     }
 

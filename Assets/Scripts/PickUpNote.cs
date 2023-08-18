@@ -41,15 +41,9 @@ public class PickUpNote : MonoBehaviour
     /// <summary>
     /// Pick up function
     /// </summary>
-  
-    void OnPickUp()
+    void OnInteract()
     {
-        if (isNote == true)
-        {
-            note.SetActive(false);
-            isNote = false;
-        }
-        else
+        if (isNote == false)
         {
             player = FindObjectOfType<NewBehaviourScript>().transform;
             Vector3 distanceToPlayer = player.position - transform.position;
@@ -58,6 +52,15 @@ public class PickUpNote : MonoBehaviour
                 note.SetActive(true);
                 isNote = true;
             }
+        }
+    }
+
+    void OnPickUp()
+    {
+        if (isNote == true)
+        {
+            note.SetActive(false);
+            isNote = false;
         }
     }
     void Update()
