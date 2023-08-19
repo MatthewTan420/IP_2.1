@@ -55,6 +55,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject Inven;
     public GameObject UI;
     public GameObject Menu;
+    public GameObject Pause;
     public GameObject DeathMenu;
     public GameObject Victory;
     public bool isMenu = false;
@@ -155,6 +156,16 @@ public class NewBehaviourScript : MonoBehaviour
         
     }
 
+    void OnEsc(InputValue value)
+    {
+        if (isDead != true)
+        {
+            Pause.SetActive(true);
+            UI.SetActive(false);
+            isLock = false;
+        }
+    }
+
     /// <summary>
     /// When user collides with object
     /// </summary>
@@ -170,6 +181,12 @@ public class NewBehaviourScript : MonoBehaviour
             isWin = false;
             isMenu = true;
             isLight = false;
+
+            noteOne.SetActive(false);
+            noteTwo.SetActive(false);
+            noteFour.SetActive(false);
+            noteFive.SetActive(false);
+            noteSix.SetActive(false);
         }
         else if (collision.gameObject.tag == "Untagged")
         {
